@@ -1,0 +1,11 @@
+.Recommendation {
+  padding-top: 10px;
+}
+
+.Recommendation__type {
+  font-weight: bold;
+}
+
+.Recommendation__notes-title {
+  font-weight: bold;
+}

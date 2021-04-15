@@ -1,0 +1,23 @@
+.VisitEdit {
+  margin: 20px 100px 20px 100px;
+  padding: 5px 0 10px 0px;
+  background: #eeeeee;
+}
+
+.VisitEdit__form {
+  text-align: left;
+  padding-left: 50px;
+}
+
+.VisitEdit__form label {
+  padding: 0 5px 0 20px;
+}
+
+.VisitEdit__form input {
+  margin-bottom: 10px;
+}
+
+.VisitEdit__button-container {
+  text-align: center;
+  padding-bottom: 20px;
+}

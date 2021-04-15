@@ -1,0 +1,27 @@
+.RecommendationEdit {
+  margin: 20px 100px 20px 100px;
+  padding: 5px 0 10px 0px;
+  background: #eeeeee;
+}
+
+.RecommendationEdit__form {
+  text-align: left;
+  padding-left: 50px;
+}
+
+.RecommendationEdit__form label {
+  padding: 0 5px 0 20px;
+}
+
+.RecommendationEdit__form input {
+  margin-bottom: 10px;
+}
+
+.RecommendationEdit__button-container {
+  text-align: center;
+  padding: 20px 0 20px 0;
+}
+
+#recommendation-notes {
+  margin: 10px 0 0 20px;
+}

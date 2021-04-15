@@ -1,0 +1,15 @@
+.VisitPage {
+  margin: 20px 100px 20px 100px;
+  padding: 5px 0 10px 0px;
+  background: #eeeeee;
+  text-align: left;
+}
+
+.Visit {
+  margin-left: 20px;
+}
+
+.VisitPage__buttons {
+  text-align: center;
+  margin: 20px 0 20px 0;
+}

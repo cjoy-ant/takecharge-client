@@ -1,0 +1,25 @@
+.header {
+  display: box;
+  background: #aaaaaa;
+  padding: 10px 0 10px 0;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+nav {
+  background: #eeeeee;
+  padding: 5px 0 5px 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+a:active {
+  color: #808080;
+}

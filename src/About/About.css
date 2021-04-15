@@ -1,0 +1,10 @@
+.About__description {
+  margin: 20px 150px 20px 150px;
+  padding: 20px 70px 20px 50px;
+  background: #eeeeee;
+  text-align: left;
+}
+
+.About__description-list {
+  margin-left: 20px;
+}

@@ -1,0 +1,15 @@
+.Visit {
+  padding-top: 10px;
+}
+
+.Visit__title {
+  font-weight: bold;
+}
+
+.Visit__information {
+  font-weight: bold;
+}
+
+#visit-notes {
+  font-family: Arial, Helvetica, sans-serif;
+}

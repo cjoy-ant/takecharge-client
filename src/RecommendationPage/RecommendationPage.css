@@ -1,0 +1,15 @@
+.RecommendationPage {
+  margin: 20px 100px 20px 100px;
+  padding: 5px 0 10px 0px;
+  background: #eeeeee;
+  text-align: left;
+}
+
+.Recommendation {
+  margin-left: 20px;
+}
+
+.RecommendationPage__buttons {
+  text-align: center;
+  margin: 20px 0 20px 0;
+}
