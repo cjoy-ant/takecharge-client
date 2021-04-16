@@ -1,4 +1,5 @@
 import React from "react";
+import { zonedTimeToUtc } from "date-fns-tz";
 import ApiContext from "../ApiContext";
 import "./VisitEdit.css";
 
@@ -56,8 +57,9 @@ export default class VisitEdit extends React.Component {
   };
 
   handleChangeDate = (e) => {
+    const dateTimeUtc = zonedTimeToUtc(e.target.value);
     this.setState({
-      visit_date: e.target.value,
+      visit_date: dateTimeUtc,
     });
   };
 
@@ -171,9 +173,9 @@ export default class VisitEdit extends React.Component {
           </select>
           <br />
 
-          <label htmlFor="visit-date">Date</label>
+          <label htmlFor="visit-date">Date {"&"} Time</label>
           <input
-            type="date"
+            type="datetime-local"
             id="visit-date"
             defaultValue={visit.visit_date}
             onChange={this.handleChangeDate}

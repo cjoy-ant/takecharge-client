@@ -51,7 +51,7 @@ const STORE = {
       visit_type: "Primary Care Physician, Internal Medicine",
       visit_provider_name: "Dr. Maria Ignacio",
       visit_location: "Advocate Health Care",
-      visit_date: "2021-08-15",
+      visit_date: "2021-08-15T13:00",
       visit_reason: "annual checkup",
       visit_notes: "ask about genetic testing referral",
     },
@@ -60,7 +60,7 @@ const STORE = {
       visit_type: "Dentist",
       visit_provider_name: "Dr. Simona Balan",
       visit_location: "Dental Clinic of Morton Grove",
-      visit_date: "2021-02-23",
+      visit_date: "2021-02-23T14:30",
       visit_reason: "fill 3 cavities",
       visit_notes: "$40 per cavity and $50 co-pay",
     },
@@ -69,7 +69,7 @@ const STORE = {
       visit_type: "Physical Therapy",
       visit_provider_name: "Dr. Gran Intarakumhang",
       visit_location: "Athletico",
-      visit_date: "2020-09-22",
+      visit_date: "2020-09-22T09:00",
       visit_reason: "broken ankle evaluation",
       visit_notes: "bring crutches and camboot",
     },
@@ -77,7 +77,7 @@ const STORE = {
   recommendations: [
     {
       recommendation_id: 1,
-      recommendation_type: "Primary Care Physician, Internal Medicine",
+      recommendation_type: "Gastroenterologist",
       recommendation_notes:
         "take omeprazolee daily for reflux, avoid reflux triggers",
     },

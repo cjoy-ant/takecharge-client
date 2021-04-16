@@ -1,4 +1,6 @@
 import React from "react";
+import { format } from "date-fns";
+import { zonedTimeToUtc } from "date-fns-tz";
 import { Link } from "react-router-dom";
 import "./Visit.css";
 
@@ -13,6 +15,7 @@ export default class Visit extends React.Component {
       visit_reason,
       visit_notes,
     } = this.props;
+
     return (
       <div className="Visit">
         <span className="Visit__title">
@@ -26,7 +29,8 @@ export default class Visit extends React.Component {
         {visit_location}
         <br />
         <span className="Visit__information">Date {"&"} Time:</span>{" "}
-        {visit_date}
+        {format(zonedTimeToUtc(visit_date), "MMMM d, yyyy")} at{" "}
+        {format(zonedTimeToUtc(visit_date), "hh:mm aaaa")}
         <br />
         <span className="Visit__information">Reason for visit:</span>{" "}
         {visit_reason}
