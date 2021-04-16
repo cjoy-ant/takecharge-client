@@ -121,6 +121,10 @@ export default class VisitAdd extends React.Component {
     }
   };
 
+  handleClickCancel = () => {
+    this.props.history.push(`/visits`);
+  };
+
   handleSubmit = () => {
     const newVisit = {
       visit_id: this.context.visits.length + 1,
@@ -187,6 +191,13 @@ export default class VisitAdd extends React.Component {
           <br />
 
           <div className="VisitAdd__button-container">
+            <button
+              type="button"
+              id="cancel-add-provider__button"
+              onClick={this.handleClickCancel}
+            >
+              Cancel
+            </button>
             <button
               type="submit"
               className="VisitAdd__button-submit"

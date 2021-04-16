@@ -44,6 +44,10 @@ export default class RecommendationAdd extends React.Component {
     }
   };
 
+  handleClickCancel = () => {
+    this.props.history.push(`/recommendations`);
+  };
+
   handleSubmit = () => {
     const newRecommendation = {
       recommendation_id: this.context.recommendations.length + 1,
@@ -74,6 +78,13 @@ export default class RecommendationAdd extends React.Component {
             required
           ></textarea>
           <div className="RecommendationAdd__button-container">
+            <button
+              type="button"
+              id="cancel-add-provider__button"
+              onClick={this.handleClickCancel}
+            >
+              Cancel
+            </button>
             <button
               type="submit"
               className="RecommendationAdd__button-submit"
