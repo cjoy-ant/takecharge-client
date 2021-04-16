@@ -78,7 +78,7 @@ export default class RecommendationEdit extends React.Component {
           <label for="recommendation-type">Specialty:</label>
           <select
             id="recommendation-type"
-            defaultValue={rec.recommendation_type} //WHY THIS BROKEN
+            defaultValue={rec.recommendation_type}
             onChange={this.handleChangeType}
           >
             {this.makeRecTypeList()}

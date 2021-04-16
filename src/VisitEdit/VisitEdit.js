@@ -144,7 +144,7 @@ export default class VisitEdit extends React.Component {
           <label htmlFor="visit-type">Specialty</label>
           <select
             id="visit-type"
-            defaultValue={visit.visit_type} //WHY IS THIS BEING WEIRD
+            defaultValue={visit.visit_type}
             onChange={this.handleChangeType}
           >
             {this.makeVisitTypeList()}

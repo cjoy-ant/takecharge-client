@@ -35,7 +35,7 @@ const STORE = {
     },
     {
       hcp_id: 4,
-      hcp_type: "Phyical Therapy",
+      hcp_type: "Physical Therapy",
       hcp_name: "Dr. Gran Intarakumhang",
       hcp_location: "Athletico",
       hcp_phone: "773-267-6922",
