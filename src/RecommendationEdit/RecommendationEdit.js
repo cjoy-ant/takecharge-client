@@ -6,6 +6,7 @@ export default class RecommendationEdit extends React.Component {
   static contextType = ApiContext;
 
   state = {
+    recommendation_id: "",
     recommendation_type: "",
     recommendation_notes: "",
   };
@@ -45,8 +46,7 @@ export default class RecommendationEdit extends React.Component {
   };
 
   handleClickCancel = () => {
-    const { provider_id } = this.props.match.params;
-    this.props.history.push(`/providers/${provider_id}`);
+    this.props.history.push(`/recommendations`);
   };
 
   handleSubmit = (e) => {
@@ -78,7 +78,8 @@ export default class RecommendationEdit extends React.Component {
           <label for="recommendation-type">Specialty:</label>
           <select
             id="recommendation-type"
-            defaultValue={rec.recommendation_type}
+            defaultValue={rec.recommendation_type} //WHY THIS BROKEN
+            onChange={this.handleChangeType}
           >
             {this.makeRecTypeList()}
           </select>
@@ -91,6 +92,7 @@ export default class RecommendationEdit extends React.Component {
             rows="10"
             cols="50"
             defaultValue={rec.recommendation_notes}
+            onChange={this.handleChangeNotes}
             required
           ></textarea>
           <div className="RecommendationEdit__button-container">

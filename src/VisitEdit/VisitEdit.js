@@ -139,12 +139,12 @@ export default class VisitEdit extends React.Component {
 
     return (
       <div className="VisitEdit">
-        <h1>Add a Visit</h1>
+        <h1>Edit a Visit</h1>
         <form className="VisitEdit__form" onSubmit={this.handleSubmit}>
           <label htmlFor="visit-type">Specialty</label>
           <select
             id="visit-type"
-            defaultValue={visit.visit_type}
+            defaultValue={visit.visit_type} //WHY IS THIS BEING WEIRD
             onChange={this.handleChangeType}
           >
             {this.makeVisitTypeList()}
