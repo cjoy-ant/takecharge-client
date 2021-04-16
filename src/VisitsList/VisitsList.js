@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import ApiContext from "../ApiContext";
 import Visit from "../Visit/Visit";
 import "./VisitsList.css";
-import { formatWithOptions } from "date-fns/fp";
 
 export default class VisitsList extends React.Component {
   static contextType = ApiContext;
@@ -11,7 +10,7 @@ export default class VisitsList extends React.Component {
   makeVisitsList = () => {
     const visitsList = this.context.visits.map((visit) => {
       return (
-        <li id={visit.visit_id}>
+        <li key={visit.visit_id} id={visit.visit_id}>
           <Visit
             visit_id={visit.visit_id}
             visit_type={visit.visit_type}

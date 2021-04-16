@@ -11,9 +11,75 @@ export default class VisitEdit extends React.Component {
 
   static contextType = ApiContext;
 
+  state = {
+    visit_id: "",
+    visit_type: "",
+    visit_provider_name: "",
+    visit_location: "",
+    visit_date: "",
+    visit_reason: "",
+    visit_notes: "",
+  };
+
+  componentDidMount() {
+    const { visits } = this.context;
+    const { visit_id } = this.props.match.params;
+    const findVisit = (visits, visit_id) =>
+      visits.find((visit) => visit.visit_id === Number(visit_id));
+    const visit = findVisit(visits, visit_id);
+
+    this.setState({
+      visit_id: visit.visit_id,
+      visit_type: visit.visit_type,
+      visit_provider_name: visit.visit_provider_name,
+      visit_location: visit.visit_location,
+      visit_date: visit.visit_date,
+      visit_reason: visit.visit_reason,
+      visit_notes: visit.visit_notes,
+    });
+  }
+
+  handleChangeType = (e) => {
+    this.setState({ visit_type: e.target.value });
+  };
+
+  handleChangeName = (e) => {
+    this.setState({
+      visit_provider_name: e.target.value,
+    });
+  };
+
+  handleChangeLocation = (e) => {
+    this.setState({
+      visit_location: e.target.value,
+    });
+  };
+
+  handleChangeDate = (e) => {
+    this.setState({
+      visit_date: e.target.value,
+    });
+  };
+
+  handleChangeReason = (e) => {
+    this.setState({
+      visit_reason: e.target.value,
+    });
+  };
+
+  handleChangeNotes = (e) => {
+    this.setState({
+      visit_notes: e.target.value,
+    });
+  };
+
   makeVisitTypeList = () => {
     const visitTypeList = this.context.providers.map((provider) => {
-      return <option value={provider.hcp_type}>{provider.hcp_type}</option>;
+      return (
+        <option key={provider.hcp_id} value={provider.hcp_type}>
+          {provider.hcp_type}
+        </option>
+      );
     });
 
     return visitTypeList;
@@ -21,7 +87,11 @@ export default class VisitEdit extends React.Component {
 
   makeProvidersList = () => {
     const providersList = this.context.providers.map((provider) => {
-      return <option value={provider.hcp_name}>{provider.hcp_name}</option>;
+      return (
+        <option key={provider.hcp_id} value={provider.hcp_name}>
+          {provider.hcp_name}
+        </option>
+      );
     });
 
     return providersList;
@@ -30,66 +100,106 @@ export default class VisitEdit extends React.Component {
   makeLocationsList = () => {
     const locationsList = this.context.providers.map((provider) => {
       return (
-        <option value={provider.hcp_location}>{provider.hcp_location}</option>
+        <option key={provider.hcp_id} value={provider.hcp_location}>
+          {provider.hcp_location}
+        </option>
       );
     });
     return locationsList;
   };
 
-  handleEditVisit = (visit_id) => {
-    this.context.editVist(visit_id);
-    this.props.history.push(`/visits`);
+  handleClickCancel = () => {
+    const { visit_id } = this.props.match.params;
+    this.props.history.push(`/visits/${visit_id}`);
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const updatedVisit = {
+      visit_id: this.state.visit_id,
+      visit_type: this.state.visit_type,
+      visit_provider_name: this.state.visit_provider_name,
+      visit_location: this.state.visit_location,
+      visit_date: this.state.visit_date,
+      visit_reason: this.state.visit_reason,
+      visit_notes: this.state.visit_notes,
+    };
+
+    this.context.editVisit(updatedVisit);
+    this.props.history.push(`/visits/${updatedVisit.visit_id}`);
   };
 
   render() {
     const { visits } = this.context;
     const { visit_id } = this.props.match.params;
     const findVisit = (visits, visit_id) =>
-      visits.find((visit) => visit.visit_id == visit_id);
+      visits.find((visit) => visit.visit_id === Number(visit_id));
     const visit = findVisit(visits, visit_id);
 
     return (
       <div className="VisitEdit">
         <h1>Add a Visit</h1>
-        <form className="VisitEdit__form">
-          <label for="visit-type">Specialty</label>
-          <select id="visit-type" value={visit.visit_type}>
+        <form className="VisitEdit__form" onSubmit={this.handleSubmit}>
+          <label htmlFor="visit-type">Specialty</label>
+          <select
+            id="visit-type"
+            defaultValue={visit.visit_type}
+            onChange={this.handleChangeType}
+          >
             {this.makeVisitTypeList()}
           </select>
           <br />
 
-          <label for="visit-provider-name">Provider Name</label>
-          <select id="visit-provider-name" value={visit.visit_provider_name}>
+          <label htmlFor="visit-provider-name">Provider Name</label>
+          <select
+            id="visit-provider-name"
+            defaultValue={visit.visit_provider_name}
+            onChange={this.handleChangeName}
+          >
             {this.makeProvidersList()}
           </select>
           <br />
 
-          <label for="visit-location">Location</label>
-          <select id="visit-location" value={visit.visit_location}>
+          <label htmlFor="visit-location">Location</label>
+          <select
+            id="visit-location"
+            defaultValue={visit.visit_location}
+            onChange={this.handleChangeLocation}
+          >
             {this.makeLocationsList()}
           </select>
           <br />
 
-          <label for="visit-date">Date</label>
-          <input type="date" id="visit-date" value={visit.visit_date}></input>
-          <br />
-
-          <label for="visit-reason">Reason for visit</label>
+          <label htmlFor="visit-date">Date</label>
           <input
-            type="text"
-            id="visit-reason"
-            value={visit.visit_reason}
+            type="date"
+            id="visit-date"
+            defaultValue={visit.visit_date}
+            onChange={this.handleChangeDate}
+            required
           ></input>
           <br />
 
-          <label for="visit-notes">Visit Notes</label>
+          <label htmlFor="visit-reason">Reason for visit</label>
+          <input
+            type="text"
+            id="visit-reason"
+            defaultValue={visit.visit_reason}
+            onChange={this.handleChangeReason}
+            required
+          ></input>
+          <br />
+
+          <label htmlFor="visit-notes">Visit Notes</label>
           <br />
           <textarea
             id="visit-notes"
-            aria-label="visist notes text area"
+            aria-label="visit notes text area"
             rows="10"
             cols="50"
-            value={visit.visit_notes}
+            defaultValue={visit.visit_notes}
+            onChange={this.handleChangeNotes}
             required
           ></textarea>
           <br />
@@ -97,10 +207,17 @@ export default class VisitEdit extends React.Component {
 
           <div className="VisitEdit__button-container">
             <button
+              type="button"
+              id="cancel-add-provider__button"
+              onClick={this.handleClickCancel}
+            >
+              Cancel
+            </button>
+
+            <button
               type="submit"
               className="VisitEdit__button-submit"
               id="edit-visit-form__button-submit"
-              onClick={this.handleEditVisit}
             >
               Save
             </button>

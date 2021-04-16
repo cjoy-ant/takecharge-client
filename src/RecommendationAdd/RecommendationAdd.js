@@ -12,7 +12,11 @@ export default class RecommendationAdd extends React.Component {
 
   makeRecTypeList = () => {
     const recTypeList = this.context.providers.map((provider) => {
-      return <option value={provider.hcp_type}>{provider.hcp_type}</option>;
+      return (
+        <option key={provider.hcp_id} value={provider.hcp_type}>
+          {provider.hcp_type}
+        </option>
+      );
     });
 
     return (
@@ -60,7 +64,7 @@ export default class RecommendationAdd extends React.Component {
           {this.makeRecTypeList()}
           <br />
 
-          <label for="recommendation-notes">Notes:</label>
+          <label htmlFor="recommendation-notes">Notes:</label>
           <textarea
             id="recommendation-notes"
             aria-label="Note text area"
@@ -72,7 +76,7 @@ export default class RecommendationAdd extends React.Component {
           <div className="RecommendationAdd__button-container">
             <button
               type="submit"
-              class="RecommendationAdd__button-submit"
+              className="RecommendationAdd__button-submit"
               id="add-rec-form__button-submit"
             >
               Save

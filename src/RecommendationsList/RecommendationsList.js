@@ -10,7 +10,7 @@ export default class RecommendationsList extends React.Component {
   makeRecommendationsList = () => {
     const recommendationsList = this.context.recommendations.map((rec) => {
       return (
-        <li id={rec.recommendation_id}>
+        <li key={rec.recommendation_id} id={rec.recommendation_id}>
           <Recommendation
             recommendation_id={rec.recommendation_id}
             recommendation_type={rec.recommendation_type}
@@ -30,7 +30,7 @@ export default class RecommendationsList extends React.Component {
         <div className="add-recommendation__button-container">
           <Link to="/add-recommendation">
             <button
-              class="RecommendationsList__button-add"
+              className="RecommendationsList__button-add"
               id="add-recommendation"
             >
               Add Recommendation

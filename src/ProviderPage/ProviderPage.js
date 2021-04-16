@@ -31,7 +31,7 @@ export default class ProviderPage extends React.Component {
     const { providers } = this.context;
     const { provider_id } = this.props.match.params;
     const findProvider = (providers, provider_id) =>
-      providers.find((provider) => provider.hcp_id == provider_id);
+      providers.find((provider) => provider.hcp_id === Number(provider_id));
     const provider = findProvider(providers, provider_id);
     const encodedAddress = provider.hcp_address_street.split(" ").join("+");
 

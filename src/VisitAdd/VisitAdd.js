@@ -1,4 +1,3 @@
-import { isMatchWithOptions } from "date-fns/fp";
 import React from "react";
 import ApiContext from "../ApiContext";
 import "./VisitAdd.css";
@@ -51,7 +50,11 @@ export default class VisitAdd extends React.Component {
 
   makeVisitTypeList = () => {
     const visitTypeList = this.context.providers.map((provider) => {
-      return <option value={provider.hcp_type}>{provider.hcp_type}</option>;
+      return (
+        <option key={provider.hcp_id} value={provider.hcp_type}>
+          {provider.hcp_type}
+        </option>
+      );
     });
 
     return (
@@ -64,7 +67,11 @@ export default class VisitAdd extends React.Component {
 
   makeProvidersList = () => {
     const providersList = this.context.providers.map((provider) => {
-      return <option value={provider.hcp_name}>{provider.hcp_name}</option>;
+      return (
+        <option key={provider.hcp_id} value={provider.hcp_name}>
+          {provider.hcp_name}
+        </option>
+      );
     });
 
     return (
@@ -134,41 +141,43 @@ export default class VisitAdd extends React.Component {
       <div className="VisitAdd">
         <h1>Add a Visit</h1>
         <form className="VisitAdd__form" onSubmit={this.validateType}>
-          <label for="visit-type">Specialty</label>
+          <label htmlFor="visit-type">Specialty</label>
           {this.makeVisitTypeList()}
 
           <br />
 
-          <label for="visit-provider-name">Provider Name</label>
+          <label htmlFor="visit-provider-name">Provider Name</label>
 
           {this.makeProvidersList()}
           <br />
 
-          <label for="visit-location">Location</label>
+          <label htmlFor="visit-location">Location</label>
           {this.makeLocationsList()}
           <br />
 
-          <label for="visit-date">Date</label>
+          <label htmlFor="visit-date">Date</label>
           <input
             type="date"
             id="visit-date"
             onChange={this.handleChangeDate}
+            required
           ></input>
           <br />
 
-          <label for="visit-reason">Reason for visit</label>
+          <label htmlFor="visit-reason">Reason for visit</label>
           <input
             type="text"
             id="visit-reason"
             onChange={this.handleChangeReason}
+            required
           ></input>
           <br />
 
-          <label for="visit-notes">Visit Notes</label>
+          <label htmlFor="visit-notes">Visit Notes</label>
           <br />
           <textarea
             id="visit-notes"
-            aria-label="visist notes text area"
+            aria-label="visit notes text area"
             rows="10"
             cols="50"
             onChange={this.handleChangeNotes}

@@ -31,7 +31,7 @@ export default class RecommendationPage extends React.Component {
     const { rec_id } = this.props.match.params;
 
     const findRecommendation = (recommendations, rec_id) =>
-      recommendations.find((rec) => rec.recommendation_id == rec_id);
+      recommendations.find((rec) => rec.recommendation_id === Number(rec_id));
     const rec = findRecommendation(recommendations, rec_id);
 
     return (

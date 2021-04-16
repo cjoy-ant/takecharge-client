@@ -19,17 +19,19 @@ export default class Visit extends React.Component {
           <Link to={`/visits/${visit_id}`}>{visit_type}</Link>
         </span>
         <br />
-        <span class="Visit__information">Provider: </span>
+        <span className="Visit__information">Provider: </span>
         {visit_provider_name}
         <br />
-        <span class="Visit__information">Location: </span>
+        <span className="Visit__information">Location: </span>
         {visit_location}
         <br />
-        <span class="Visit__information">Date {"&"} Time:</span> {visit_date}
+        <span className="Visit__information">Date {"&"} Time:</span>{" "}
+        {visit_date}
         <br />
-        <span class="Visit__information">Reason for visit:</span> {visit_reason}
+        <span className="Visit__information">Reason for visit:</span>{" "}
+        {visit_reason}
         <br />
-        <span class="Visit__information">Notes:</span> {visit_notes}
+        <span className="Visit__information">Notes:</span> {visit_notes}
       </div>
     );
   }

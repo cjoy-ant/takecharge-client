@@ -11,7 +11,7 @@ export default class ProvidersList extends React.Component {
     const providersList = this.context.providers.map((provider) => {
       const encodedAddress = provider.hcp_address_street.split(" ").join("+");
       return (
-        <li id={provider.hcp_id}>
+        <li key={provider.hcp_id} id={provider.hcp_id}>
           <Provider
             hcp_id={provider.hcp_id}
             hcp_type={provider.hcp_type}

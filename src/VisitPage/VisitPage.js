@@ -30,7 +30,7 @@ export default class VisitPage extends React.Component {
     const { visits } = this.context;
     const { visit_id } = this.props.match.params;
     const findVisit = (visits, visit_id) =>
-      visits.find((visit) => visit.visit_id == visit_id);
+      visits.find((visit) => visit.visit_id === Number(visit_id));
     const visit = findVisit(visits, visit_id);
 
     return (

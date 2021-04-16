@@ -42,6 +42,7 @@ export default class Provider extends React.Component {
         <br />
         <a
           target="_blank"
+          rel="noreferrer"
           href={`https://www.google.com/maps/place/${encodedAddress}+${hcp_address_city}+${hcp_address_state}+${hcp_address_zip}`}
         >
           Directions

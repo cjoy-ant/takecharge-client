@@ -60,11 +60,11 @@ class App extends Component {
   };
 
   editProvider = (updatedProvider) => {
-    // this.setState({
-    //   providers: this.state.providers.map((p) =>
-    //     p.hcp_id !== updatedProvider.hcp_id ? p : updatedProvider
-    //   ),
-    // });
+    this.setState({
+      providers: this.state.providers.map((p) =>
+        p.hcp_id !== updatedProvider.hcp_id ? p : updatedProvider
+      ),
+    });
   };
 
   // VISITS events
@@ -82,11 +82,11 @@ class App extends Component {
   };
 
   editVisit = (updatedVisit) => {
-    // this.setState({
-    //   visits: this.state.visits.map((v) =>
-    //     v.visit_id !== updatedVisit.visit_id ? v : updatedVisit
-    //   ),
-    // });
+    this.setState({
+      visits: this.state.visits.map((v) =>
+        v.visit_id !== updatedVisit.visit_id ? v : updatedVisit
+      ),
+    });
   };
 
   // RECOMMENDATIONS events
@@ -106,13 +106,13 @@ class App extends Component {
   };
 
   editRecommendation = (updatedRecommendation) => {
-    // this.setState({
-    //   recommendations: this.state.recommendations.map((r) =>
-    //     r.recommendation_id !== updatedRecommendation.recommendation_id
-    //       ? r
-    //       : updatedRecommendation
-    //   ),
-    // });
+    this.setState({
+      recommendations: this.state.recommendations.map((r) =>
+        r.recommendation_id !== updatedRecommendation.recommendation_id
+          ? r
+          : updatedRecommendation
+      ),
+    });
   };
 
   render() {

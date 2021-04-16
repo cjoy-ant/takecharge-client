@@ -67,7 +67,11 @@ export default class ProviderAdd extends React.Component {
 
   makeStatesListHTML = () => {
     const statesList = states.map((state) => {
-      return <option value={state}>{state}</option>;
+      return (
+        <option key={state} value={state}>
+          {state}
+        </option>
+      );
     });
 
     return statesList;
@@ -106,7 +110,7 @@ export default class ProviderAdd extends React.Component {
           onSubmit={this.handleSubmit}
         >
           <h2>General Information</h2>
-          <label for="hcp-type">Specialty</label>
+          <label htmlFor="hcp-type">Specialty</label>
           <input
             id="hcp-type"
             placeholder="(e.g., Primary Care Physician)"
@@ -115,7 +119,7 @@ export default class ProviderAdd extends React.Component {
           ></input>
           <br />
 
-          <label for="hcp-name">Name</label>
+          <label htmlFor="hcp-name">Name</label>
           <input
             id="hcp-name"
             placeholder="First and Last Name"
@@ -124,7 +128,7 @@ export default class ProviderAdd extends React.Component {
           ></input>
           <br />
 
-          <label for="hcp-location">Location</label>
+          <label htmlFor="hcp-location">Location</label>
           <input
             id="hcp-location"
             placeholder="Hospital or Facility Affiliation"
@@ -135,7 +139,7 @@ export default class ProviderAdd extends React.Component {
 
           <h2>Contact</h2>
 
-          <label for="hcp-phone">Phone Number</label>
+          <label htmlFor="hcp-phone">Phone Number</label>
           <input
             id="hcp-phone"
             type="tel"
@@ -144,23 +148,23 @@ export default class ProviderAdd extends React.Component {
             required
           ></input>
           <br />
-          <label for="hcp-address-street">Street Address</label>
+          <label htmlFor="hcp-address-street">Street Address</label>
           <input id="hcp-address-street" required></input>
           <br />
 
-          <label for="hcp-address-city">City</label>
+          <label htmlFor="hcp-address-city">City</label>
           <input
             id="hcp-address-city"
             onChange={this.handleChangeCity}
             required
           ></input>
 
-          <label for="hcp-address-state">State</label>
+          <label htmlFor="hcp-address-state">State</label>
           <select id="hcp-address-state" onChange={this.handleChangeState}>
             {this.makeStatesListHTML()}
           </select>
 
-          <label for="hcp-address-zip">Zip Code</label>
+          <label htmlFor="hcp-address-zip">Zip Code</label>
           <input
             id="hcp-address-zip"
             onChange={this.handleChangeZip}
