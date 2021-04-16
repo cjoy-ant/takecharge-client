@@ -6,30 +6,111 @@ import "./ProviderAdd.css";
 export default class ProviderAdd extends React.Component {
   static contextType = ApiContext;
 
+  state = {
+    hcp_type: "",
+    hcp_name: "",
+    hcp_location: "",
+    hcp_phone: "",
+    hcp_address_street: "",
+    hcp_address_city: "",
+    hcp_address_state: "",
+    hcp_address_zip: "",
+  };
+
+  handleChangeType = (e) => {
+    this.setState({
+      hcp_type: e.target.value,
+    });
+  };
+
+  handleChangeName = (e) => {
+    this.setState({
+      hcp_name: e.target.value,
+    });
+  };
+
+  handleChangeLocation = (e) => {
+    this.setState({
+      hcp_location: e.target.value,
+    });
+  };
+
+  handleChangePhone = (e) => {
+    this.setState({
+      hcp_phone: e.target.value,
+    });
+  };
+
+  handleChangeStreet = (e) => {
+    this.setState({
+      hcp_address_street: e.target.value,
+    });
+  };
+
+  handleChangeCity = (e) => {
+    this.setState({
+      hcp_address_city: e.target.value,
+    });
+  };
+
+  handleChangeState = (e) => {
+    this.setState({
+      hcp_address_state: e.target.value,
+    });
+  };
+
+  handleChangeZip = (e) => {
+    this.setState({
+      hcp_address_zip: e.target.value,
+    });
+  };
+
   makeStatesListHTML = () => {
     const statesList = states.map((state) => {
       return <option value={state}>{state}</option>;
     });
 
-    return <select id="hcp-address-state">{statesList}</select>;
+    return statesList;
   };
 
-  handleAddProvider = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    this.context.addProvider();
+
+    const newProvider = {
+      hcp_id: this.context.providers.length + 1,
+      hcp_type: this.state.hcp_type,
+      hcp_name: this.state.hcp_name,
+      hcp_location: this.state.hcp_location,
+      hcp_phone: this.state.hcp_phone,
+      hcp_address_street: this.state.hcp_address_street,
+      hcp_address_city: this.state.hcp_address_city,
+      hcp_address_state: this.state.hcp_address_state,
+      hcp_address_zip: this.state.hcp_address_zip,
+    };
+
+    this.context.addProvider(newProvider);
     this.props.history.push(`/providers`);
+  };
+
+  handleClickCancel = () => {
+    this.props.history.push("/providers");
   };
 
   render() {
     return (
       <div className="ProviderAdd">
         <h1>Add a Health Care Provider</h1>
-        <form className="ProviderAdd__form" id="add-provider-form">
+        <form
+          className="ProviderAdd__form"
+          id="add-provider-form"
+          onSubmit={this.handleSubmit}
+        >
           <h2>General Information</h2>
           <label for="hcp-type">Specialty</label>
           <input
             id="hcp-type"
             placeholder="(e.g., Primary Care Physician)"
+            onChange={this.handleChangeType}
             required
           ></input>
           <br />
@@ -38,6 +119,7 @@ export default class ProviderAdd extends React.Component {
           <input
             id="hcp-name"
             placeholder="First and Last Name"
+            onChange={this.handleChangeName}
             required
           ></input>
           <br />
@@ -46,6 +128,7 @@ export default class ProviderAdd extends React.Component {
           <input
             id="hcp-location"
             placeholder="Hospital or Facility Affiliation"
+            onChange={this.handleChangeLocation}
             required
           ></input>
           <br />
@@ -57,6 +140,7 @@ export default class ProviderAdd extends React.Component {
             id="hcp-phone"
             type="tel"
             placeholder="xxx-xxx-xxxx"
+            onChange={this.handleChangePhone}
             required
           ></input>
           <br />
@@ -65,22 +149,37 @@ export default class ProviderAdd extends React.Component {
           <br />
 
           <label for="hcp-address-city">City</label>
-          <input id="hcp-address-city" required></input>
+          <input
+            id="hcp-address-city"
+            onChange={this.handleChangeCity}
+            required
+          ></input>
 
           <label for="hcp-address-state">State</label>
-          {this.makeStatesListHTML()}
+          <select id="hcp-address-state" onChange={this.handleChangeState}>
+            {this.makeStatesListHTML()}
+          </select>
 
           <label for="hcp-address-zip">Zip Code</label>
-          <input id="hcp-address-zip" required></input>
+          <input
+            id="hcp-address-zip"
+            onChange={this.handleChangeZip}
+            required
+          ></input>
           <br />
           <br />
           <div className="ProviderAdd__button-container">
-            <label for="add-provider__button-submit" />
+            <button
+              type="button"
+              id="cancel-add-provider__button"
+              onClick={this.handleClickCancel}
+            >
+              Cancel
+            </button>
             <button
               type="submit"
               className="ProviderAdd__button-submit"
               id="add-provider__button-submit"
-              onClick={this.handleAddProvider}
             >
               Save
             </button>

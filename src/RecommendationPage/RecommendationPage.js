@@ -21,7 +21,7 @@ export default class RecommendationPage extends React.Component {
       )
     ) {
       const { rec_id } = this.props.match.params;
-      this.context.deleteRecommendation(rec_id);
+      this.context.deleteRecommendation(Number(rec_id));
       this.props.history.push(`/recommendations`);
     }
   };

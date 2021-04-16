@@ -21,3 +21,7 @@
   text-align: center;
   padding-bottom: 20px;
 }
+
+#cancel-add-provider__button {
+  margin-right: 20px;
+}

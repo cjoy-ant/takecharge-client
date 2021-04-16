@@ -21,7 +21,8 @@ export default class ProviderPage extends React.Component {
       )
     ) {
       const { provider_id } = this.props.match.params;
-      this.context.deleteProvider(provider_id);
+      this.context.deleteProvider(Number(provider_id));
+
       this.props.history.push(`/providers`);
     }
   };

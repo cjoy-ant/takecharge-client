@@ -21,7 +21,7 @@ export default class VisitPage extends React.Component {
       )
     ) {
       const { visit_id } = this.props.match.params;
-      this.context.deleteVisit(visit_id);
+      this.context.deleteVisit(Number(visit_id));
       this.props.history.push(`/visits`);
     }
   };

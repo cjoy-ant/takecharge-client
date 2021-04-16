@@ -31,65 +31,104 @@ class App extends Component {
     recommendations: [],
   };
 
-  componentDidMount() {
-    this.fetchProviders();
-    this.fetchVisits();
-    this.fetchRecommendations();
-  }
-
-  fetchProviders = () => {
+  setInitialState = () => {
     this.setState({
       providers: STORE.providers,
-    });
-  };
-
-  fetchVisits = () => {
-    this.setState({
       visits: STORE.visits,
-    });
-  };
-
-  fetchRecommendations = () => {
-    this.setState({
       recommendations: STORE.recommendations,
     });
   };
 
-  // PROVIDERS event handlers
-  handleAddProvider = () => {};
+  componentDidMount() {
+    this.setInitialState();
+  }
 
-  handleDeleteProvider = () => {};
+  // PROVIDERS events
+  addProvider = (newProvider) => {
+    this.setState({
+      providers: [...this.state.providers, newProvider],
+    });
+  };
 
-  handleEditProvider = () => {};
+  deleteProvider = (provider_id) => {
+    const newProviders = this.state.providers.filter(
+      (p) => p.hcp_id !== provider_id
+    );
+    this.setState({
+      providers: newProviders,
+    });
+  };
 
-  // VISITS event handlers
-  handleAddVisit = () => {};
+  editProvider = (updatedProvider) => {
+    // this.setState({
+    //   providers: this.state.providers.map((p) =>
+    //     p.hcp_id !== updatedProvider.hcp_id ? p : updatedProvider
+    //   ),
+    // });
+  };
 
-  handleDeleteVisit = () => {};
+  // VISITS events
+  addVisit = (newVisit) => {
+    this.setState({
+      visits: [...this.state.visits, newVisit],
+    });
+  };
 
-  handleEditVisit = () => {};
+  deleteVisit = (visit_id) => {
+    const newVisits = this.state.visits.filter((v) => v.visit_id !== visit_id);
+    this.setState({
+      visits: newVisits,
+    });
+  };
 
-  // RECOMMENDATIONS event handlers
-  handleAddRecommendation = () => {};
+  editVisit = (updatedVisit) => {
+    // this.setState({
+    //   visits: this.state.visits.map((v) =>
+    //     v.visit_id !== updatedVisit.visit_id ? v : updatedVisit
+    //   ),
+    // });
+  };
 
-  handleDeleteRecommendation = () => {};
+  // RECOMMENDATIONS events
+  addRecommendation = (newRecommendation) => {
+    this.setState({
+      recommendations: [...this.state.recommendations, newRecommendation],
+    });
+  };
 
-  handleEditRecommendation = () => {};
+  deleteRecommendation = (rec_id) => {
+    const newRecommendations = this.state.recommendations.filter(
+      (r) => r.recommendation_id !== rec_id
+    );
+    this.setState({
+      recommendations: newRecommendations,
+    });
+  };
+
+  editRecommendation = (updatedRecommendation) => {
+    // this.setState({
+    //   recommendations: this.state.recommendations.map((r) =>
+    //     r.recommendation_id !== updatedRecommendation.recommendation_id
+    //       ? r
+    //       : updatedRecommendation
+    //   ),
+    // });
+  };
 
   render() {
     const value = {
       providers: this.state.providers,
       visits: this.state.visits,
       recommendations: this.state.recommendations,
-      addProvider: this.handleAddProvider,
-      deleteProvider: this.handleDeleteProvider,
-      editProvider: this.handleEditProvider,
-      addVisit: this.handleAddVisit,
-      deleteVisit: this.handleDeleteVisit,
-      editVisit: this.handleEditVisit,
-      addRecommendation: this.handleAddRecommendation,
-      deleteRecommendation: this.handleDeleteRecommendation,
-      editRecommendation: this.handleEditRecommendation,
+      addProvider: this.addProvider,
+      deleteProvider: this.deleteProvider,
+      editProvider: this.editProvider,
+      addVisit: this.addVisit,
+      deleteVisit: this.deleteVisit,
+      editVisit: this.editVisit,
+      addRecommendation: this.addRecommendation,
+      deleteRecommendation: this.deleteRecommendation,
+      editRecommendation: this.editRecommendation,
     };
 
     return (
