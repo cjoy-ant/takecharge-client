@@ -1,5 +1,5 @@
 .VisitEdit {
-  margin: 20px 100px 20px 100px;
+  margin: 20px 20px 20px 20px;
   padding: 5px 0 10px 0px;
   background: #eeeeee;
 }
@@ -15,6 +15,10 @@
 
 .VisitEdit__form input {
   margin-bottom: 10px;
+}
+
+#visit-notes {
+  max-width: 80%;
 }
 
 .VisitEdit__button-container {

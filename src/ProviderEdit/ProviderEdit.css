@@ -1,16 +1,16 @@
 .ProviderEdit {
-  margin: 20px 100px 20px 100px;
-  padding: 5px 0 10px 0px;
+  margin: 20px 20px 20px 20px;
+  padding: 5px 10px 10px 0px;
   background: #eeeeee;
 }
 
 .ProviderEdit__form {
   text-align: left;
-  padding-left: 50px;
+  padding-left: 20px;
 }
 
 .ProviderEdit__form label {
-  padding: 0 5px 0 20px;
+  padding: 0 5px 0 5px;
 }
 
 .ProviderEdit__form input {

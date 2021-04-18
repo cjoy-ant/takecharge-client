@@ -1,5 +1,5 @@
 .RecommendationEdit {
-  margin: 20px 100px 20px 100px;
+  margin: 20px 10px 20px 10px;
   padding: 5px 0 10px 0px;
   background: #eeeeee;
 }
@@ -24,4 +24,5 @@
 
 #recommendation-notes {
   margin: 10px 0 0 20px;
+  max-width: 80%;
 }
