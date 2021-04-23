@@ -1,5 +1,6 @@
 import React from "react";
 import ApiContext from "../ApiContext";
+import config from "../config";
 import "./RecommendationAdd.css";
 
 export default class RecommendationAdd extends React.Component {
@@ -50,13 +51,29 @@ export default class RecommendationAdd extends React.Component {
 
   handleSubmit = () => {
     const newRecommendation = {
-      recommendation_id: this.context.recommendations.length + 1,
       recommendation_type: this.state.recommendation_type,
       recommendation_notes: this.state.recommendation_notes,
     };
-
-    this.context.addRecommendation(newRecommendation);
-    this.props.history.push(`/recommendations`);
+    fetch(`${config.API_ENDPOINT}/recommendations`, {
+      method: "POST",
+      body: JSON.stringify(newRecommendation),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Something went wrong`);
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.context.addRecommendation(newRecommendation);
+        this.props.history.push(`/recommendations`);
+      })
+      .catch((error) => {
+        this.setState({ error });
+      });
   };
 
   render() {

@@ -1,6 +1,7 @@
 import React from "react";
 import { zonedTimeToUtc } from "date-fns-tz";
 import ApiContext from "../ApiContext";
+import config from "../config";
 import "./VisitAdd.css";
 
 export default class VisitAdd extends React.Component {
@@ -32,9 +33,8 @@ export default class VisitAdd extends React.Component {
   };
 
   handleChangeDate = (e) => {
-    const dateTimeUtc = zonedTimeToUtc(e.target.value);
     this.setState({
-      visit_date: dateTimeUtc,
+      visit_date: e.target.value,
     });
   };
 
@@ -129,7 +129,6 @@ export default class VisitAdd extends React.Component {
 
   handleSubmit = () => {
     const newVisit = {
-      visit_id: this.context.visits.length + 1,
       visit_type: this.state.visit_type,
       visit_provider_name: this.state.visit_provider_name,
       visit_location: this.state.visit_location,
@@ -137,9 +136,26 @@ export default class VisitAdd extends React.Component {
       visit_reason: this.state.visit_reason,
       visit_notes: this.state.visit_notes,
     };
-
-    this.context.addVisit(newVisit);
-    this.props.history.push(`/visits`);
+    fetch(`${config.API_ENDPOINT}/visits`, {
+      method: "POST",
+      body: JSON.stringify(newVisit),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Something went wrong`);
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.context.addVisit(newVisit);
+        this.props.history.push(`/visits`);
+      })
+      .catch((error) => {
+        this.setState({ error });
+      });
   };
 
   render() {
