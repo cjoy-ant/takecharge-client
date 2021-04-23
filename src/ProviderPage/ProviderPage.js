@@ -2,16 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ApiContext from "../ApiContext";
 import config from "../config";
+import PropTypes from "prop-types";
 import Provider from "../Provider/Provider";
 import "./ProviderPage.css";
 
 export default class ProviderPage extends React.Component {
-  static defaultProps = {
-    match: {
-      params: {},
-    },
-  };
-
   state = {
     error: null,
     hcp_id: "",
@@ -135,3 +130,12 @@ export default class ProviderPage extends React.Component {
     );
   }
 }
+
+ProviderPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

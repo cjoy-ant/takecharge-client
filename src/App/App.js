@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import ApiContext from "../ApiContext";
-// import STORE from "../STORE";
-// import ThemeContext from "../ThemeContext";
-// import LanguageContenxt from "../LanguageContext";
 import config from "../config";
-// import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import Nav from "../Nav/Nav";
 import Home from "../Home/Home";
 import About from "../About/About";
@@ -165,37 +161,42 @@ class App extends Component {
 
     return (
       <ApiContext.Provider value={value}>
-        <div className="App">
-          <Route path="/" component={Nav} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/providers" component={ProvidersList} />
-          <Route path="/providers/:provider_id" component={ProviderPage} />
-          <Route exact path="/add-provider" component={ProviderAdd} />
-          <Route path="/edit-provider/:provider_id" component={ProviderEdit} />
-          <Route exact path="/visits" component={VisitsList} />
-          <Route path="/visits/:visit_id" component={VisitPage} />
-          <Route exact path="/add-visit" component={VisitAdd} />
-          <Route path="/edit-visit/:visit_id" component={VisitEdit} />
-          <Route
-            exact
-            path="/recommendations"
-            component={RecommendationsList}
-          />
-          <Route
-            path="/recommendations/:rec_id"
-            component={RecommendationPage}
-          />
-          <Route
-            exact
-            path="/add-recommendation"
-            component={RecommendationAdd}
-          />
-          <Route
-            path="/edit-recommendation/:rec_id"
-            component={RecommendationEdit}
-          />
-        </div>
+        <ErrorBoundary>
+          <div className="App">
+            <Route path="/" component={Nav} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/providers" component={ProvidersList} />
+            <Route path="/providers/:provider_id" component={ProviderPage} />
+            <Route exact path="/add-provider" component={ProviderAdd} />
+            <Route
+              path="/edit-provider/:provider_id"
+              component={ProviderEdit}
+            />
+            <Route exact path="/visits" component={VisitsList} />
+            <Route path="/visits/:visit_id" component={VisitPage} />
+            <Route exact path="/add-visit" component={VisitAdd} />
+            <Route path="/edit-visit/:visit_id" component={VisitEdit} />
+            <Route
+              exact
+              path="/recommendations"
+              component={RecommendationsList}
+            />
+            <Route
+              path="/recommendations/:rec_id"
+              component={RecommendationPage}
+            />
+            <Route
+              exact
+              path="/add-recommendation"
+              component={RecommendationAdd}
+            />
+            <Route
+              path="/edit-recommendation/:rec_id"
+              component={RecommendationEdit}
+            />
+          </div>
+        </ErrorBoundary>
       </ApiContext.Provider>
     );
   }

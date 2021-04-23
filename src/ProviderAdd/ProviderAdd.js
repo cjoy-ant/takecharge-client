@@ -1,6 +1,7 @@
 import React from "react";
 import ApiContext from "../ApiContext";
 import config from "../config";
+import PropTypes from "prop-types";
 import states from "../states";
 import "./ProviderAdd.css";
 
@@ -211,3 +212,9 @@ export default class ProviderAdd extends React.Component {
     );
   }
 }
+
+ProviderAdd.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

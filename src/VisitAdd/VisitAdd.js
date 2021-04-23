@@ -1,7 +1,7 @@
 import React from "react";
-import { zonedTimeToUtc } from "date-fns-tz";
 import ApiContext from "../ApiContext";
 import config from "../config";
+import PropTypes from "prop-types";
 import "./VisitAdd.css";
 
 export default class VisitAdd extends React.Component {
@@ -229,3 +229,9 @@ export default class VisitAdd extends React.Component {
     );
   }
 }
+
+VisitAdd.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
