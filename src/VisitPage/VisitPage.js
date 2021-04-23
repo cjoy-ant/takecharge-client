@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ApiContext from "../ApiContext";
 import config from "../config";
+import PropTypes from "prop-types";
 import Visit from "../Visit/Visit";
 import "./VisitPage.css";
 
@@ -126,3 +127,12 @@ export default class VisitPage extends React.Component {
     );
   }
 }
+
+VisitPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

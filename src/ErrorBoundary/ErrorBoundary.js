@@ -29,7 +29,7 @@ class ErrorBoundary extends Component {
   }
 }
 
-ErrorBoundary.proptypes = {
+ErrorBoundary.propTypes = {
   children: PropTypes.node.isRequired,
 };
 

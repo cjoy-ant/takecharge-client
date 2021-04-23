@@ -2,16 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ApiContext from "../ApiContext";
 import config from "../config";
+import PropTypes from "prop-types";
 import Recommendation from "../Recommendation/Recommendation";
 import "./RecommendationPage.css";
 
 export default class RecommendationPage extends React.Component {
-  static defaultProps = {
-    match: {
-      params: {},
-    },
-  };
-
   state = {
     error: null,
     recommendation_id: "",
@@ -108,3 +103,12 @@ export default class RecommendationPage extends React.Component {
     );
   }
 }
+
+RecommendationPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

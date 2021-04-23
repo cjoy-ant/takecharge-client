@@ -1,6 +1,7 @@
 import React from "react";
 import ApiContext from "../ApiContext";
 import config from "../config";
+import PropTypes from "prop-types";
 import "./RecommendationEdit.css";
 
 export default class RecommendationEdit extends React.Component {
@@ -160,3 +161,12 @@ export default class RecommendationEdit extends React.Component {
     );
   }
 }
+
+RecommendationEdit.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

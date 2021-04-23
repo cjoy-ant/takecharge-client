@@ -1,6 +1,7 @@
 import React from "react";
 import ApiContext from "../ApiContext";
 import config from "../config";
+import PropTypes from "prop-types";
 import states from "../states";
 import "./ProviderEdit.css";
 
@@ -288,3 +289,12 @@ export default class ProviderEdit extends React.Component {
     );
   }
 }
+
+ProviderEdit.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
