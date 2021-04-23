@@ -17,6 +17,7 @@ export default class Provider extends React.Component {
       hcp_address_city,
       hcp_address_state,
       hcp_address_zip,
+      hcp_date_modified,
       encodedAddress,
     } = this.props;
 

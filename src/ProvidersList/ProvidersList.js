@@ -22,6 +22,7 @@ export default class ProvidersList extends React.Component {
             hcp_address_city={provider.hcp_address_city}
             hcp_address_state={provider.hcp_address_state}
             hcp_address_zip={provider.hcp_address_zip}
+            hcp_date_modified={provider.hcp_date_modified}
             encodedAddress={encodedAddress}
           />
         </li>
