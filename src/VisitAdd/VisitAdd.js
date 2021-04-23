@@ -33,9 +33,8 @@ export default class VisitAdd extends React.Component {
   };
 
   handleChangeDate = (e) => {
-    const dateTimeUtc = zonedTimeToUtc(e.target.value);
     this.setState({
-      visit_date: dateTimeUtc,
+      visit_date: e.target.value,
     });
   };
 

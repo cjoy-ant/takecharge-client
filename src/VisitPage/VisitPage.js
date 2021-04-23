@@ -18,7 +18,7 @@ export default class VisitPage extends React.Component {
     visit_type: "",
     visit_provider_name: "",
     visit_location: "",
-    visit_date: "",
+    visit_date: "2021-01-01T00:00:000Z",
     visit_reason: "",
     visit_notes: "",
     visit_date_modified: "",
@@ -38,6 +38,7 @@ export default class VisitPage extends React.Component {
         if (!res.ok) {
           return res.json().then((error) => Promise.reject(error));
         }
+        console.log(res);
         return res.json();
       })
       .then((res) => {
