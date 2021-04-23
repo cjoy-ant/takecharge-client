@@ -158,7 +158,7 @@ export default class ProviderEdit extends React.Component {
 
   resetFields = (newFields) => {
     this.setState({
-      hcp_id: newFields.hcp_type || "",
+      hcp_id: newFields.hcp_id || "",
       hcp_type: newFields.hcp_type || "",
       hcp_name: newFields.hcp_name || "",
       hcp_location: newFields.hcp_location || "",
@@ -173,8 +173,6 @@ export default class ProviderEdit extends React.Component {
 
   render() {
     const {
-      error,
-      hcp_id,
       hcp_type,
       hcp_name,
       hcp_location,
@@ -184,7 +182,6 @@ export default class ProviderEdit extends React.Component {
       hcp_address_state,
       hcp_address_zip,
     } = this.state;
-    const provider_id = hcp_id;
 
     return (
       <div className="ProviderEdit">

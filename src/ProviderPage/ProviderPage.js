@@ -90,7 +90,6 @@ export default class ProviderPage extends React.Component {
 
   render() {
     const {
-      error,
       hcp_id,
       hcp_type,
       hcp_name,
