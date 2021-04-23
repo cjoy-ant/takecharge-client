@@ -1,5 +1,7 @@
 import React from "react";
 import ApiContext from "../ApiContext";
+import config from "../config";
+import PropTypes from "prop-types";
 import states from "../states";
 import "./ProviderAdd.css";
 
@@ -81,7 +83,6 @@ export default class ProviderAdd extends React.Component {
     e.preventDefault();
 
     const newProvider = {
-      hcp_id: this.context.providers.length + 1,
       hcp_type: this.state.hcp_type,
       hcp_name: this.state.hcp_name,
       hcp_location: this.state.hcp_location,
@@ -92,8 +93,26 @@ export default class ProviderAdd extends React.Component {
       hcp_address_zip: this.state.hcp_address_zip,
     };
 
-    this.context.addProvider(newProvider);
-    this.props.history.push(`/providers`);
+    fetch(`${config.API_ENDPOINT}/providers`, {
+      method: "POST",
+      body: JSON.stringify(newProvider),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Something went wrong`);
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.context.addProvider(newProvider);
+        this.props.history.push(`/providers`);
+      })
+      .catch((error) => {
+        this.setState({ error });
+      });
   };
 
   handleClickCancel = () => {
@@ -193,3 +212,9 @@ export default class ProviderAdd extends React.Component {
     );
   }
 }
+
+ProviderAdd.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

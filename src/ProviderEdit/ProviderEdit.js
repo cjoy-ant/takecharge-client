@@ -1,5 +1,7 @@
 import React from "react";
 import ApiContext from "../ApiContext";
+import config from "../config";
+import PropTypes from "prop-types";
 import states from "../states";
 import "./ProviderEdit.css";
 
@@ -19,23 +21,37 @@ export default class ProviderEdit extends React.Component {
   };
 
   componentDidMount() {
-    const { providers } = this.context;
     const { provider_id } = this.props.match.params;
-    const findProvider = (providers, provider_id) =>
-      providers.find((provider) => provider.hcp_id === Number(provider_id));
-    const provider = findProvider(providers, provider_id);
-
-    this.setState({
-      hcp_id: provider.hcp_id,
-      hcp_type: provider.hcp_type,
-      hcp_name: provider.hcp_name,
-      hcp_location: provider.hcp_location,
-      hcp_phone: provider.hcp_phone,
-      hcp_address_street: provider.hcp_address_street,
-      hcp_address_city: provider.hcp_address_city,
-      hcp_address_state: provider.hcp_address_state,
-      hcp_address_zip: provider.hcp_address_zip,
-    });
+    fetch(`${config.API_ENDPOINT}/providers/${provider_id}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => Promise.reject(error));
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.setState({
+          hcp_id: res.hcp_id,
+          hcp_type: res.hcp_type,
+          hcp_name: res.hcp_name,
+          hcp_location: res.hcp_location,
+          hcp_phone: res.hcp_phone,
+          hcp_address_street: res.hcp_address_street,
+          hcp_address_city: res.hcp_address_city,
+          hcp_address_state: res.hcp_address_state,
+          hcp_address_zip: res.hcp_address_zip,
+          hcp_date_modified: res.hcp_date_modified,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({ error });
+      });
   }
 
   makeStatesListHTML = () => {
@@ -105,7 +121,7 @@ export default class ProviderEdit extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    const { provider_id } = this.props.match.params;
     const updatedProvider = {
       hcp_id: this.state.hcp_id,
       hcp_type: this.state.hcp_type,
@@ -118,16 +134,55 @@ export default class ProviderEdit extends React.Component {
       hcp_address_zip: this.state.hcp_address_zip,
     };
 
-    this.context.editProvider(updatedProvider);
-    this.props.history.push(`/providers/${updatedProvider.hcp_id}`);
+    fetch(`${config.API_ENDPOINT}/providers/${provider_id}`, {
+      method: "PATCH",
+      body: JSON.stringify(updatedProvider),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => Promise.reject(error));
+        }
+      })
+      .then((res) => {
+        this.resetFields(updatedProvider);
+        this.context.editProvider(updatedProvider);
+        this.props.history.push(`/providers/${updatedProvider.hcp_id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({ error });
+      });
+  };
+
+  resetFields = (newFields) => {
+    this.setState({
+      hcp_id: newFields.hcp_id || "",
+      hcp_type: newFields.hcp_type || "",
+      hcp_name: newFields.hcp_name || "",
+      hcp_location: newFields.hcp_location || "",
+      hcp_phone: newFields.hcp_phone || "",
+      hcp_address_street: newFields.hcp_address_street || "",
+      hcp_address_city: newFields.hcp_address_city || "",
+      hcp_address_state: newFields.hcp_address_state || "",
+      hcp_address_zip: newFields.hcp_address_zip || "",
+      hcp_date_modified: newFields.hcp_date_modified || "",
+    });
   };
 
   render() {
-    const { providers } = this.context;
-    const { provider_id } = this.props.match.params;
-    const findProvider = (providers, provider_id) =>
-      providers.find((provider) => provider.hcp_id === Number(provider_id));
-    const provider = findProvider(providers, provider_id);
+    const {
+      hcp_type,
+      hcp_name,
+      hcp_location,
+      hcp_phone,
+      hcp_address_street,
+      hcp_address_city,
+      hcp_address_state,
+      hcp_address_zip,
+    } = this.state;
 
     return (
       <div className="ProviderEdit">
@@ -141,7 +196,7 @@ export default class ProviderEdit extends React.Component {
           <label htmlFor="hcp-type">Specialty</label>
           <input
             id="hcp-type"
-            defaultValue={provider.hcp_type}
+            defaultValue={hcp_type}
             onChange={this.handleChangeType}
             required
           ></input>
@@ -150,7 +205,7 @@ export default class ProviderEdit extends React.Component {
           <label htmlFor="hcp-name">Name</label>
           <input
             id="hcp-name"
-            defaultValue={provider.hcp_name}
+            defaultValue={hcp_name}
             onChange={this.handleChangeName}
             required
           ></input>
@@ -159,7 +214,7 @@ export default class ProviderEdit extends React.Component {
           <label htmlFor="hcp-location">Location</label>
           <input
             id="hcp-location"
-            defaultValue={provider.hcp_location}
+            defaultValue={hcp_location}
             onChange={this.handleChangeLocation}
             required
           ></input>
@@ -171,7 +226,7 @@ export default class ProviderEdit extends React.Component {
           <input
             id="hcp-phone"
             type="tel"
-            defaultValue={provider.hcp_phone}
+            defaultValue={hcp_phone}
             onChange={this.handleChangePhone}
             required
           ></input>
@@ -180,7 +235,7 @@ export default class ProviderEdit extends React.Component {
           <label htmlFor="hcp-address-street">Address</label>
           <input
             id="hcp-address-street"
-            defaultValue={provider.hcp_address_street}
+            defaultValue={hcp_address_street}
             onChange={this.handleChangeStreet}
             required
           ></input>
@@ -189,7 +244,7 @@ export default class ProviderEdit extends React.Component {
           <label htmlFor="hcp-address-city">City</label>
           <input
             id="hcp-address-city"
-            defaultValue={provider.hcp_address_city}
+            defaultValue={hcp_address_city}
             onChange={this.handleChangeCity}
             required
           ></input>
@@ -197,7 +252,7 @@ export default class ProviderEdit extends React.Component {
           <label htmlFor="hcp-address-state">State</label>
           <select
             id="hcp-address-state"
-            defaultValue={provider.hcp_address_state}
+            defaultValue={hcp_address_state}
             onChange={this.handleChangeStreet}
           >
             {this.makeStatesListHTML()}
@@ -206,7 +261,7 @@ export default class ProviderEdit extends React.Component {
           <label htmlFor="hcp-address-zip">Zip Code</label>
           <input
             id="hcp-address-zip"
-            defaultValue={provider.hcp_address_zip}
+            defaultValue={hcp_address_zip}
             onChange={this.handleChangeZip}
             required
           ></input>
@@ -234,3 +289,12 @@ export default class ProviderEdit extends React.Component {
     );
   }
 }
+
+ProviderEdit.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

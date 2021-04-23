@@ -1,53 +1,116 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ApiContext from "../ApiContext";
+import config from "../config";
+import PropTypes from "prop-types";
 import Provider from "../Provider/Provider";
 import "./ProviderPage.css";
 
 export default class ProviderPage extends React.Component {
-  static defaultProps = {
-    match: {
-      params: {},
-    },
+  state = {
+    error: null,
+    hcp_id: "",
+    hcp_type: "",
+    hcp_name: "",
+    hcp_location: "",
+    hcp_phone: "",
+    hcp_address_street: "",
+    hcp_address_city: "",
+    hcp_address_state: "",
+    hcp_address_zip: "",
+    hcp_date_modified: "",
   };
 
   static contextType = ApiContext;
 
+  componentDidMount() {
+    const { provider_id } = this.props.match.params;
+    fetch(`${config.API_ENDPOINT}/providers/${provider_id}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => Promise.reject(error));
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.setState({
+          hcp_id: res.hcp_id,
+          hcp_type: res.hcp_type,
+          hcp_name: res.hcp_name,
+          hcp_location: res.hcp_location,
+          hcp_phone: res.hcp_phone,
+          hcp_address_street: res.hcp_address_street,
+          hcp_address_city: res.hcp_address_city,
+          hcp_address_state: res.hcp_address_state,
+          hcp_address_zip: res.hcp_address_zip,
+          hcp_date_modified: res.hcp_date_modified,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({ error });
+      });
+  }
+
   handleClickDelete = (e) => {
     e.preventDefault();
+    const { provider_id } = this.props.match.params;
+
     if (
       window.confirm(
         "Are you sure you want to remove this provider?\nClick OK to remove."
       )
     ) {
-      const { provider_id } = this.props.match.params;
-      this.context.deleteProvider(Number(provider_id));
-
-      this.props.history.push(`/providers`);
+      fetch(`${config.API_ENDPOINT}/providers/${provider_id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then(() => {
+          this.context.deleteProvider(provider_id);
+          this.props.history.push(`/providers`);
+        })
+        .catch((error) => {
+          console.error(error);
+          this.setState({ error });
+        });
     }
   };
 
   render() {
-    const { providers } = this.context;
-    const { provider_id } = this.props.match.params;
-    const findProvider = (providers, provider_id) =>
-      providers.find((provider) => provider.hcp_id === Number(provider_id));
-    const provider = findProvider(providers, provider_id);
-    const encodedAddress = provider.hcp_address_street.split(" ").join("+");
+    const {
+      hcp_id,
+      hcp_type,
+      hcp_name,
+      hcp_location,
+      hcp_phone,
+      hcp_address_street,
+      hcp_address_city,
+      hcp_address_state,
+      hcp_address_zip,
+    } = this.state;
+    const encodedAddress = hcp_address_street.split(" ").join("+");
+    const provider_id = hcp_id;
 
     return (
       <div className="ProviderPage">
         <div className="Provider">
           <Provider
-            hcp_id={provider.hcp_id}
-            hcp_type={provider.hcp_type}
-            hcp_name={provider.hcp_name}
-            hcp_location={provider.hcp_location}
-            hcp_phone={provider.hcp_phone}
-            hcp_address_street={provider.hcp_address_street}
-            hcp_address_city={provider.hcp_address_city}
-            hcp_address_state={provider.hcp_address_state}
-            hcp_address_zip={provider.hcp_address_zip}
+            hcp_id={hcp_id}
+            hcp_type={hcp_type}
+            hcp_name={hcp_name}
+            hcp_location={hcp_location}
+            hcp_phone={hcp_phone}
+            hcp_address_street={hcp_address_street}
+            hcp_address_city={hcp_address_city}
+            hcp_address_state={hcp_address_state}
+            hcp_address_zip={hcp_address_zip}
             encodedAddress={encodedAddress}
           />
         </div>
@@ -67,3 +130,12 @@ export default class ProviderPage extends React.Component {
     );
   }
 }
+
+ProviderPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

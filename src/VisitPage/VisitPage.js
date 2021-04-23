@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ApiContext from "../ApiContext";
+import config from "../config";
+import PropTypes from "prop-types";
 import Visit from "../Visit/Visit";
 import "./VisitPage.css";
 
@@ -11,7 +13,52 @@ export default class VisitPage extends React.Component {
     },
   };
 
+  state = {
+    error: null,
+    visit_id: "",
+    visit_type: "",
+    visit_provider_name: "",
+    visit_location: "",
+    visit_date: "2021-01-01T00:00:000Z",
+    visit_reason: "",
+    visit_notes: "",
+    visit_date_modified: "",
+  };
+
   static contextType = ApiContext;
+
+  componentDidMount() {
+    const { visit_id } = this.props.match.params;
+    fetch(`${config.API_ENDPOINT}/visits/${visit_id}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => Promise.reject(error));
+        }
+        console.log(res);
+        return res.json();
+      })
+      .then((res) => {
+        this.setState({
+          visit_id: res.visit_id,
+          visit_type: res.visit_type,
+          visit_provider_name: res.visit_provider_name,
+          visit_location: res.visit_location,
+          visit_date: res.visit_date,
+          visit_reason: res.visit_reason,
+          visit_notes: res.visit_notes,
+          visit_date_modified: res.visit_date_modified,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({ error });
+      });
+  }
 
   handleClickDelete = (e) => {
     e.preventDefault();
@@ -21,33 +68,51 @@ export default class VisitPage extends React.Component {
       )
     ) {
       const { visit_id } = this.props.match.params;
-      this.context.deleteVisit(Number(visit_id));
-      this.props.history.push(`/visits`);
+      fetch(`${config.API_ENDPOINT}/visits/${visit_id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then(() => {
+          this.context.deleteVisit(visit_id);
+          this.props.history.push(`/visits`);
+        })
+        .catch((error) => {
+          console.error(error);
+          this.setState({ error });
+        });
     }
   };
 
   render() {
-    const { visits } = this.context;
-    const { visit_id } = this.props.match.params;
-    const findVisit = (visits, visit_id) =>
-      visits.find((visit) => visit.visit_id === Number(visit_id));
-    const visit = findVisit(visits, visit_id);
+    const {
+      visit_id,
+      visit_type,
+      visit_provider_name,
+      visit_location,
+      visit_date,
+      visit_reason,
+      visit_notes,
+    } = this.state;
+
+    const vis_id = visit_id;
 
     return (
       <div className="VisitPage">
         <div className="Visit">
           <Visit
-            visit_id={visit.visit_id}
-            visit_type={visit.visit_type}
-            visit_provider_name={visit.visit_provider_name}
-            visit_location={visit.visit_location}
-            visit_date={visit.visit_date}
-            visit_reason={visit.visit_reason}
-            visit_notes={visit.visit_notes}
+            visit_id={visit_id}
+            visit_type={visit_type}
+            visit_provider_name={visit_provider_name}
+            visit_location={visit_location}
+            visit_date={visit_date}
+            visit_reason={visit_reason}
+            visit_notes={visit_notes}
           />
         </div>
         <div className="VisitPage__buttons">
-          <Link to={`/edit-visit/${visit_id}`}>
+          <Link to={`/edit-visit/${vis_id}`}>
             <button>Edit</button>
           </Link>
           <button
@@ -62,3 +127,12 @@ export default class VisitPage extends React.Component {
     );
   }
 }
+
+VisitPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

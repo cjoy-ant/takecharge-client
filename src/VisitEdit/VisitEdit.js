@@ -1,6 +1,8 @@
 import React from "react";
 import { zonedTimeToUtc } from "date-fns-tz";
 import ApiContext from "../ApiContext";
+import config from "../config";
+import PropTypes from "prop-types";
 import "./VisitEdit.css";
 
 export default class VisitEdit extends React.Component {
@@ -23,21 +25,35 @@ export default class VisitEdit extends React.Component {
   };
 
   componentDidMount() {
-    const { visits } = this.context;
     const { visit_id } = this.props.match.params;
-    const findVisit = (visits, visit_id) =>
-      visits.find((visit) => visit.visit_id === Number(visit_id));
-    const visit = findVisit(visits, visit_id);
-
-    this.setState({
-      visit_id: visit.visit_id,
-      visit_type: visit.visit_type,
-      visit_provider_name: visit.visit_provider_name,
-      visit_location: visit.visit_location,
-      visit_date: visit.visit_date,
-      visit_reason: visit.visit_reason,
-      visit_notes: visit.visit_notes,
-    });
+    fetch(`${config.API_ENDPOINT}/visits/${visit_id}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => Promise.reject(error));
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.setState({
+          visit_id: res.visit_id,
+          visit_type: res.visit_type,
+          visit_provider_name: res.visit_provider_name,
+          visit_location: res.visit_location,
+          visit_date: res.visit_date,
+          visit_reason: res.visit_reason,
+          visit_notes: res.visit_notes,
+          visit_date_modified: res.visit_date_modified,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({ error });
+      });
   }
 
   handleChangeType = (e) => {
@@ -117,7 +133,7 @@ export default class VisitEdit extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    const { visit_id } = this.props.match.params;
     const updatedVisit = {
       visit_id: this.state.visit_id,
       visit_type: this.state.visit_type,
@@ -128,16 +144,51 @@ export default class VisitEdit extends React.Component {
       visit_notes: this.state.visit_notes,
     };
 
-    this.context.editVisit(updatedVisit);
-    this.props.history.push(`/visits/${updatedVisit.visit_id}`);
+    fetch(`${config.API_ENDPOINT}/visits/${visit_id}`, {
+      method: "PATCH",
+      body: JSON.stringify(updatedVisit),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => Promise.reject(error));
+        }
+      })
+      .then((res) => {
+        this.resetFields(updatedVisit);
+        this.context.editProvider(updatedVisit);
+        this.props.history.push(`/visits/${updatedVisit.visit_id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({ error });
+      });
+  };
+
+  resetFields = (newFields) => {
+    this.setState({
+      visit_id: newFields.visit_id || "",
+      visit_type: newFields.visit_type || "",
+      visit_provider_name: newFields.visit_provider_name || "",
+      visit_location: newFields.visit_location || "",
+      visit_date: newFields.visit_date || "",
+      visit_reason: newFields.visit_reason || "",
+      visit_notes: newFields.visit_notes || "",
+      visit_date_modified: newFields.visit_date_modified || "",
+    });
   };
 
   render() {
-    const { visits } = this.context;
-    const { visit_id } = this.props.match.params;
-    const findVisit = (visits, visit_id) =>
-      visits.find((visit) => visit.visit_id === Number(visit_id));
-    const visit = findVisit(visits, visit_id);
+    const {
+      visit_type,
+      visit_provider_name,
+      visit_location,
+      visit_date,
+      visit_reason,
+      visit_notes,
+    } = this.state;
 
     return (
       <div className="VisitEdit">
@@ -146,7 +197,7 @@ export default class VisitEdit extends React.Component {
           <label htmlFor="visit-type">Specialty</label>
           <select
             id="visit-type"
-            defaultValue={visit.visit_type}
+            defaultValue={visit_type}
             onChange={this.handleChangeType}
           >
             {this.makeVisitTypeList()}
@@ -156,7 +207,7 @@ export default class VisitEdit extends React.Component {
           <label htmlFor="visit-provider-name">Provider Name</label>
           <select
             id="visit-provider-name"
-            defaultValue={visit.visit_provider_name}
+            defaultValue={visit_provider_name}
             onChange={this.handleChangeName}
           >
             {this.makeProvidersList()}
@@ -166,7 +217,7 @@ export default class VisitEdit extends React.Component {
           <label htmlFor="visit-location">Location</label>
           <select
             id="visit-location"
-            defaultValue={visit.visit_location}
+            defaultValue={visit_location}
             onChange={this.handleChangeLocation}
           >
             {this.makeLocationsList()}
@@ -177,7 +228,7 @@ export default class VisitEdit extends React.Component {
           <input
             type="datetime-local"
             id="visit-date"
-            defaultValue={visit.visit_date}
+            defaultValue={visit_date}
             onChange={this.handleChangeDate}
             required
           ></input>
@@ -187,7 +238,7 @@ export default class VisitEdit extends React.Component {
           <input
             type="text"
             id="visit-reason"
-            defaultValue={visit.visit_reason}
+            defaultValue={visit_reason}
             onChange={this.handleChangeReason}
             required
           ></input>
@@ -200,7 +251,7 @@ export default class VisitEdit extends React.Component {
             aria-label="visit notes text area"
             rows="10"
             cols="50"
-            defaultValue={visit.visit_notes}
+            defaultValue={visit_notes}
             onChange={this.handleChangeNotes}
             required
           ></textarea>
@@ -229,3 +280,12 @@ export default class VisitEdit extends React.Component {
     );
   }
 }
+
+VisitEdit.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

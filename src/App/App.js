@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import ApiContext from "../ApiContext";
-import STORE from "../STORE";
-// import ThemeContext from "../ThemeContext";
-// import LanguageContenxt from "../LanguageContext";
-// import config from "../config";
-// import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import config from "../config";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import Nav from "../Nav/Nav";
 import Home from "../Home/Home";
 import About from "../About/About";
@@ -31,88 +27,120 @@ class App extends Component {
     recommendations: [],
   };
 
-  setInitialState = () => {
-    this.setState({
-      providers: STORE.providers,
-      visits: STORE.visits,
-      recommendations: STORE.recommendations,
-    });
+  componentDidMount() {
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/providers`),
+      fetch(`${config.API_ENDPOINT}/recommendations`),
+      fetch(`${config.API_ENDPOINT}/visits`),
+    ])
+      .then(([providersRes, recommendationsRes, visitsRes]) => {
+        if (!providersRes.ok) {
+          return providersRes.json().then((e) => Promise.reject(e));
+        }
+        if (!recommendationsRes.ok) {
+          return recommendationsRes.json().then((e) => Promise.reject(e));
+        }
+        if (!visitsRes.ok) {
+          return visitsRes.json().then((e) => Promise.reject(e));
+        }
+        return Promise.all([
+          providersRes.json(),
+          recommendationsRes.json(),
+          visitsRes.json(),
+        ]);
+      })
+      .then(([providers, recommendations, visits]) => {
+        this.setState({ providers, recommendations, visits });
+      })
+      .catch((error) => {
+        console.error({ error });
+      });
+  }
+
+  // FETCH functions (for any changes to database)
+
+  fetchProviders = () => {
+    fetch(`${config.API_ENDPOINT}/providers`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Something went wrong");
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.setState({
+          providers: res,
+        });
+      });
   };
 
-  componentDidMount() {
-    this.setInitialState();
-  }
+  fetchRecommendations = () => {
+    fetch(`${config.API_ENDPOINT}/recommendations`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Something went wrong");
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.setState({
+          recommendations: res,
+        });
+      });
+  };
+
+  fetchVisits = () => {
+    fetch(`${config.API_ENDPOINT}/visits`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Something went wrong");
+        }
+        return res.json();
+      })
+      .then((res) => {
+        this.setState({
+          visits: res,
+        });
+      });
+  };
 
   // PROVIDERS events
   addProvider = (newProvider) => {
-    this.setState({
-      providers: [...this.state.providers, newProvider],
-    });
+    this.fetchProviders();
   };
 
   deleteProvider = (provider_id) => {
-    const newProviders = this.state.providers.filter(
-      (p) => p.hcp_id !== provider_id
-    );
-    this.setState({
-      providers: newProviders,
-    });
+    this.fetchProviders();
   };
 
   editProvider = (updatedProvider) => {
-    this.setState({
-      providers: this.state.providers.map((p) =>
-        p.hcp_id !== updatedProvider.hcp_id ? p : updatedProvider
-      ),
-    });
-  };
-
-  // VISITS events
-  addVisit = (newVisit) => {
-    this.setState({
-      visits: [...this.state.visits, newVisit],
-    });
-  };
-
-  deleteVisit = (visit_id) => {
-    const newVisits = this.state.visits.filter((v) => v.visit_id !== visit_id);
-    this.setState({
-      visits: newVisits,
-    });
-  };
-
-  editVisit = (updatedVisit) => {
-    this.setState({
-      visits: this.state.visits.map((v) =>
-        v.visit_id !== updatedVisit.visit_id ? v : updatedVisit
-      ),
-    });
+    this.fetchProviders();
   };
 
   // RECOMMENDATIONS events
   addRecommendation = (newRecommendation) => {
-    this.setState({
-      recommendations: [...this.state.recommendations, newRecommendation],
-    });
+    this.fetchRecommendations();
   };
 
   deleteRecommendation = (rec_id) => {
-    const newRecommendations = this.state.recommendations.filter(
-      (r) => r.recommendation_id !== rec_id
-    );
-    this.setState({
-      recommendations: newRecommendations,
-    });
+    this.fetchRecommendations();
   };
 
   editRecommendation = (updatedRecommendation) => {
-    this.setState({
-      recommendations: this.state.recommendations.map((r) =>
-        r.recommendation_id !== updatedRecommendation.recommendation_id
-          ? r
-          : updatedRecommendation
-      ),
-    });
+    this.fetchRecommendations();
+  };
+
+  // VISITS events
+  addVisit = (newVisit) => {
+    this.fetchVisits();
+  };
+
+  deleteVisit = (visit_id) => {
+    this.fetchVisits();
+  };
+
+  editVisit = (updatedVisit) => {
+    this.fetchVisits();
   };
 
   render() {
@@ -133,37 +161,42 @@ class App extends Component {
 
     return (
       <ApiContext.Provider value={value}>
-        <div className="App">
-          <Route path="/" component={Nav} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/providers" component={ProvidersList} />
-          <Route path="/providers/:provider_id" component={ProviderPage} />
-          <Route exact path="/add-provider" component={ProviderAdd} />
-          <Route path="/edit-provider/:provider_id" component={ProviderEdit} />
-          <Route exact path="/visits" component={VisitsList} />
-          <Route path="/visits/:visit_id" component={VisitPage} />
-          <Route exact path="/add-visit" component={VisitAdd} />
-          <Route path="/edit-visit/:visit_id" component={VisitEdit} />
-          <Route
-            exact
-            path="/recommendations"
-            component={RecommendationsList}
-          />
-          <Route
-            path="/recommendations/:rec_id"
-            component={RecommendationPage}
-          />
-          <Route
-            exact
-            path="/add-recommendation"
-            component={RecommendationAdd}
-          />
-          <Route
-            path="/edit-recommendation/:rec_id"
-            component={RecommendationEdit}
-          />
-        </div>
+        <ErrorBoundary>
+          <div className="App">
+            <Route path="/" component={Nav} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/providers" component={ProvidersList} />
+            <Route path="/providers/:provider_id" component={ProviderPage} />
+            <Route exact path="/add-provider" component={ProviderAdd} />
+            <Route
+              path="/edit-provider/:provider_id"
+              component={ProviderEdit}
+            />
+            <Route exact path="/visits" component={VisitsList} />
+            <Route path="/visits/:visit_id" component={VisitPage} />
+            <Route exact path="/add-visit" component={VisitAdd} />
+            <Route path="/edit-visit/:visit_id" component={VisitEdit} />
+            <Route
+              exact
+              path="/recommendations"
+              component={RecommendationsList}
+            />
+            <Route
+              path="/recommendations/:rec_id"
+              component={RecommendationPage}
+            />
+            <Route
+              exact
+              path="/add-recommendation"
+              component={RecommendationAdd}
+            />
+            <Route
+              path="/edit-recommendation/:rec_id"
+              component={RecommendationEdit}
+            />
+          </div>
+        </ErrorBoundary>
       </ApiContext.Provider>
     );
   }
