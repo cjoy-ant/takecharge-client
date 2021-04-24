@@ -87,7 +87,9 @@ export default class VisitAdd extends React.Component {
   makeLocationsList = () => {
     const locationsList = this.context.providers.map((provider) => {
       return (
-        <option value={provider.hcp_location}>{provider.hcp_location}</option>
+        <option key={provider.hcp_id} value={provider.hcp_location}>
+          {provider.hcp_location}
+        </option>
       );
     });
     return (

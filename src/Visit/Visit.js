@@ -47,7 +47,7 @@ Visit.defaultProps = {
   visit_type: "",
   visit_provider_name: "",
   visit_location: "",
-  visit_date: "2021-01-01T01:00:000Z",
+  visit_date: "",
   visit_reason: "",
   visit_notes: "",
 };
@@ -57,7 +57,7 @@ Visit.propTypes = {
   visit_type: PropTypes.string.isRequired,
   visit_provider_name: PropTypes.string.isRequired,
   visit_location: PropTypes.string.isRequired,
-  visit_date: PropTypes.instanceOf(Date),
+  visit_date: PropTypes.string.isRequired,
   visit_reason: PropTypes.string.isRequired,
   visit_notes: PropTypes.string.isRequired,
 };

@@ -9,19 +9,19 @@ export default function Nav() {
         <header>TakeCharge</header>
       </div>
       <nav>
-        <Link to="/" exact>
+        <Link to="/" exact="true">
           Home
         </Link>
-        <Link to="/about" exact>
+        <Link to="/about" exact="true">
           About
         </Link>
-        <Link to="/providers" exact>
+        <Link to="/providers" exact="true">
           Providers
         </Link>
-        <Link to="/visits" exact>
+        <Link to="/visits" exact="true">
           Visits
         </Link>
-        <Link to="/recommendations" exact>
+        <Link to="/recommendations" exact="true">
           Recommendations
         </Link>
       </nav>
