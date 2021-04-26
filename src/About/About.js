@@ -21,7 +21,7 @@ export default function About() {
 
         <p>
           TakeCharge allows patients to save and manage information related to
-          their doctors, appointments, and recommendations in a way that THEY
+          their health care providers, visits, and recommendations in a way that THEY
           can understand. The patient, their caregiver, or their healthcare
           provider can quickly type the information into designated areas
           throughout the app, using only language that is appropriate for the
