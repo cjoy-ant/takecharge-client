@@ -232,6 +232,12 @@ export default class VisitAdd extends React.Component {
   }
 }
 
+VisitAdd.defaultProps = {
+  history: {
+    push: () => {}
+  }
+}
+
 VisitAdd.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,

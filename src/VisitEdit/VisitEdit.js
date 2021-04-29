@@ -281,6 +281,15 @@ export default class VisitEdit extends React.Component {
   }
 }
 
+VisitEdit.defaultProps = {
+  match: {
+    params: {}
+  },
+  history: {
+    push: () => {}
+  }
+}
+
 VisitEdit.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object,

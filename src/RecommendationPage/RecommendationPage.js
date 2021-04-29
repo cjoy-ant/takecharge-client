@@ -104,6 +104,15 @@ export default class RecommendationPage extends React.Component {
   }
 }
 
+RecommendationPage.defaultProps = {
+  match: {
+    params: {}
+  },
+  history: {
+    push: () => {}
+  }
+}
+
 RecommendationPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object,

@@ -121,7 +121,7 @@ export default class RecommendationEdit extends React.Component {
       <div className="RecommendationEdit">
         <h2>Edit a Recommendation</h2>
         <form className="RecommendationEdit__form" onSubmit={this.handleSubmit}>
-          <label for="recommendation-type">Specialty:</label>
+          <label htmlFor="recommendation-type">Specialty:</label>
           <select
             id="recommendation-type"
             defaultValue={recommendation_type}
@@ -159,6 +159,15 @@ export default class RecommendationEdit extends React.Component {
         </form>
       </div>
     );
+  }
+}
+
+RecommendationEdit.defaultProps = {
+  match: {
+    params: {}
+  },
+  history: {
+    push: () => {}
   }
 }
 

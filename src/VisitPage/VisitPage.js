@@ -128,6 +128,15 @@ export default class VisitPage extends React.Component {
   }
 }
 
+VisitPage.defaultProps = {
+  match: {
+    params: {}
+  },
+  history: {
+    push: () => {}
+  }
+}
+
 VisitPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object,

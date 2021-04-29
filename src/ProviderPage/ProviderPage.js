@@ -131,6 +131,15 @@ export default class ProviderPage extends React.Component {
   }
 }
 
+ProviderPage.defaultProps = {
+  match: {
+    params: {}
+  },
+  history: {
+    push: () => {}
+  }
+}
+
 ProviderPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object,

@@ -215,6 +215,12 @@ export default class ProviderAdd extends React.Component {
   }
 }
 
+ProviderAdd.defaultProps = {
+  history: {
+    push: () => {}
+  }
+}
+
 ProviderAdd.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,

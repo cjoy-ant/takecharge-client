@@ -291,6 +291,15 @@ export default class ProviderEdit extends React.Component {
   }
 }
 
+ProviderEdit.defaultProps = {
+  match: {
+    params: {}
+  },
+  history: {
+    push: () => {}
+  }
+}
+
 ProviderEdit.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object,

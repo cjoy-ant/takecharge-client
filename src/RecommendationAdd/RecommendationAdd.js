@@ -82,7 +82,7 @@ export default class RecommendationAdd extends React.Component {
       <div className="RecommendationAdd">
         <h2>Add a Recommendation</h2>
         <form className="RecommendationAdd__form" onSubmit={this.validateType}>
-          <label for="recommendation-type">Specialty:</label>
+          <label htmlFor="recommendation-type">Specialty:</label>
           {this.makeRecTypeList()}
           <br />
 
@@ -114,6 +114,12 @@ export default class RecommendationAdd extends React.Component {
         </form>
       </div>
     );
+  }
+}
+
+RecommendationAdd.defaultProps = {
+  history: {
+    push: () => {}
   }
 }
 
