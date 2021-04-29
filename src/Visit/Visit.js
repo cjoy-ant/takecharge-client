@@ -20,7 +20,7 @@ export default class Visit extends React.Component {
     return (
       <div className="Visit">
         <span className="Visit__title">
-          <Link to={`/visits/${visit_id}`}>{visit_type}</Link>
+          <Link to={`/visits/${visit_id}`}><h3>{visit_type}</h3></Link>
         </span>
         <br />
         <span className="Visit__information">Provider: </span>

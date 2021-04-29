@@ -186,13 +186,13 @@ export default class ProviderEdit extends React.Component {
 
     return (
       <div className="ProviderEdit">
-        <h1>Edit Provider Information</h1>
+        <h2>Edit Provider Information</h2>
         <form
           className="ProviderEdit__form"
           id="edit-provider-form"
           onSubmit={this.handleSubmit}
         >
-          <h2>General Information</h2>
+          <h3>General Information</h3>
           <label htmlFor="hcp-type">Specialty</label>
           <input
             id="hcp-type"
@@ -220,7 +220,7 @@ export default class ProviderEdit extends React.Component {
           ></input>
           <br />
 
-          <h2>Contact</h2>
+          <h3>Contact</h3>
 
           <label htmlFor="hcp-phone">Phone Number</label>
           <input
@@ -257,6 +257,7 @@ export default class ProviderEdit extends React.Component {
           >
             {this.makeStatesListHTML()}
           </select>
+          <br />
 
           <label htmlFor="hcp-address-zip">Zip Code</label>
           <input

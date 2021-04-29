@@ -1,15 +1,13 @@
-.VisitPage {
-  margin: 20px 20px 20px 20px;
-  padding: 5px 0 10px 0px;
-  background: #eeeeee;
-  text-align: left;
-}
-
-.Visit {
-  margin-left: 20px;
+.Visit__visit {
+  margin: auto;
 }
 
 .VisitPage__buttons {
   text-align: center;
-  margin: 20px 0 20px 0;
+}
+
+@media only screen and (min-width: 800px) {
+  .VisitPage {
+    margin: 20px 100px 20px 100px;
+  }
 }

@@ -1,6 +1,6 @@
 .VisitsList__button-add {
   text-align: left;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 ul {
@@ -8,15 +8,14 @@ ul {
 }
 
 li {
-  background: #eeeeee;
-  margin: 0 50px 20px 0;
-  padding: 5px 20px 20px 20px;
+  margin: 0px 0px 0px -40px;
 }
+
 
 a {
   padding: 0 20px 0 0;
   text-decoration: none;
-  color: #21577a;
+  color: #0B4343;
 }
 
 a:hover,
@@ -26,4 +25,14 @@ a:active {
 
 .hcp_address {
   font-weight: bold;
+}
+
+@media only screen and (min-width: 800px) {
+  li {
+    margin: 0px 80px 0px 40px;
+  }
+  
+  .VisitsList__button-add {
+    margin-left: 60px;
+  }
 }

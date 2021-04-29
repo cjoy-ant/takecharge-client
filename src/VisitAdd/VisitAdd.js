@@ -163,7 +163,7 @@ export default class VisitAdd extends React.Component {
   render() {
     return (
       <div className="VisitAdd">
-        <h1>Add a Visit</h1>
+        <h2>Add a Visit</h2>
         <form className="VisitAdd__form" onSubmit={this.validateType}>
           <label htmlFor="visit-type">Specialty</label>
           {this.makeVisitTypeList()}

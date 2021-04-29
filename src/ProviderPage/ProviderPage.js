@@ -100,7 +100,7 @@ export default class ProviderPage extends React.Component {
 
     return (
       <div className="ProviderPage">
-        <div className="Provider">
+        <div className="ProviderPage__provider">
           <Provider
             hcp_id={hcp_id}
             hcp_type={hcp_type}

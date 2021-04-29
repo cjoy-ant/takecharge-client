@@ -1,10 +1,24 @@
+.About {
+  margin: 20px;
+}
+
 .About__description {
-  margin: 20px 20px 20px 20px;
-  padding: 20px 40px 20px 30px;
-  background: #eeeeee;
+  padding: 20px 30px 20px 30px;
+  background: #EDF5F5;
+  border-radius: 10px;
   text-align: left;
 }
 
 .About__description-list {
   margin-left: 20px;
+}
+
+@media only screen and (min-width: 800px) {
+  .About {
+    margin: 20px 100px 20px 100px;
+  }
+
+  .About__description {
+    padding: 20px 30px 20px 50px;
+  }
 }

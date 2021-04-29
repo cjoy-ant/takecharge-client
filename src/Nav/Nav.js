@@ -5,13 +5,10 @@ import "./Nav.css";
 export default function Nav() {
   return (
     <div className="Nav">
-      <div className="header">
-        <header>TakeCharge</header>
-      </div>
-      <nav>
-        <Link to="/" exact="true">
-          Home
-        </Link>
+      <header>
+        <Link to="/" exact="true" className="Nav__home">TakeCharge</Link>
+      </header>
+      <nav className="Nav__links">
         <Link to="/about" exact="true">
           About
         </Link>

@@ -1,11 +1,18 @@
 .Recommendation {
-  padding: 10px 20px 0 0;
-}
-
-.Recommendation__type {
-  font-weight: bold;
+  margin: 20px;
+  padding: 10px 25px 35px 35px;
+  background: #EDF5F5;
+  border-radius: 10px;
+  text-align: left;
+  max-width: 100%;
 }
 
 .Recommendation__notes-title {
   font-weight: bold;
+}
+
+@media only screen and (min-width: 800px) {
+  .Recommendation {
+    margin: 20px 100px 20 100px;
+  }
 }

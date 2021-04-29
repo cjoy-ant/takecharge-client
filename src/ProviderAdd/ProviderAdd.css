@@ -1,16 +1,13 @@
-.ProviderAdd {
-  margin: 20px 20px 20px 20px;
-  padding: 5px 0 10px 0px;
-  background: #eeeeee;
-}
-
 .ProviderAdd__form {
   text-align: left;
-  padding-left: 50px;
+  margin: 20px;
+  padding: 20px;
+  background: #EDF5F5;
+  border-radius: 10px;
 }
 
 .ProviderAdd__form label {
-  padding: 0 5px 0 20px;
+  padding: 0 5px 0 15px;
 }
 
 .ProviderAdd__form input {
@@ -19,9 +16,15 @@
 
 .ProviderAdd__button-container {
   text-align: center;
-  padding-bottom: 20px;
 }
 
 #cancel-add-provider__button {
   margin-right: 20px;
+}
+
+@media only screen and (min-width: 800px) {
+  .ProviderAdd__form {
+    margin: 20px 100px 20px 100px;
+    padding: 20px 20px 20px 50px;
+  }
 }

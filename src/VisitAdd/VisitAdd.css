@@ -1,12 +1,9 @@
-.VisitAdd {
-  margin: 20px 20px 20px 20px;
-  padding: 5px 0 10px 0px;
-  background: #eeeeee;
-}
-
 .VisitAdd__form {
+  margin: 20px;
+  padding: 30px 25px 25px 25px;
   text-align: left;
-  padding-left: 50px;
+  background: #EDF5F5;
+  border-radius: 10px;
 }
 
 .VisitAdd__form label {
@@ -15,15 +12,26 @@
 
 .VisitAdd__form input {
   margin-bottom: 10px;
+  max-width: 80%;
+}
+
+.VisitAdd__form select{
+  max-width: 80%
 }
 
 .VisitAdd__button-container {
   text-align: center;
-  padding-bottom: 20px;
 }
 
 #visit-notes {
   margin-left: 20px;
   max-width: 80%;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@media only screen and (min-width: 800px) {
+  .VisitAdd__form {
+    margin: 20px 100px 20px 100px;
+    padding: 35px 20px 20px 50px;
+  }
 }

@@ -1,12 +1,9 @@
-.VisitEdit {
-  margin: 20px 20px 20px 20px;
-  padding: 5px 0 10px 0px;
-  background: #eeeeee;
-}
-
 .VisitEdit__form {
+  margin: 20px;
+  padding: 25px 20px 25px 20px;
   text-align: left;
-  padding-left: 50px;
+  background: #EDF5F5;
+  border-radius: 10px;
 }
 
 .VisitEdit__form label {
@@ -23,5 +20,10 @@
 
 .VisitEdit__button-container {
   text-align: center;
-  padding-bottom: 20px;
+}
+
+@media only screen and (min-width: 800px) {
+  .VisitEdit__form {
+    margin: 20px 100px 20px 100px;
+  }
 }

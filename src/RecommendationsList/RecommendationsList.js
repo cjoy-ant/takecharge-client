@@ -27,7 +27,7 @@ export default class RecommendationsList extends React.Component {
     return (
       <div className="RecommendationsList">
         <h2>Recommendations for You</h2>
-        <div className="add-recommendation__button-container">
+        <div className="RecommendationsList__button-add">
           <Link to="/add-recommendation">
             <button
               className="RecommendationsList__button-add"

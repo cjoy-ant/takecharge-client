@@ -192,7 +192,7 @@ export default class VisitEdit extends React.Component {
 
     return (
       <div className="VisitEdit">
-        <h1>Edit a Visit</h1>
+        <h2>Edit a Visit</h2>
         <form className="VisitEdit__form" onSubmit={this.handleSubmit}>
           <label htmlFor="visit-type">Specialty</label>
           <select

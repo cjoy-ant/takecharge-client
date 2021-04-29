@@ -1,9 +1,28 @@
-.add-recommendation__button-container {
+.RecommendationsList__button-add {
   text-align: left;
-  margin-left: 40px;
+  margin-left: 10px;
 }
 
 ul {
   list-style: none;
   text-align: left;
 }
+
+li {
+  margin: 0px 0px 0px -40px;
+}
+
+a {
+  color: #0B4343
+}
+
+@media only screen and (min-width: 800px) {
+  li {
+    margin: 0px 100px 0px 60px;
+  }
+  
+  .RecommendationsList__button-add {
+    margin-left: 60px;
+  }
+}
+

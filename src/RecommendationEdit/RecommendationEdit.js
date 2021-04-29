@@ -119,7 +119,7 @@ export default class RecommendationEdit extends React.Component {
 
     return (
       <div className="RecommendationEdit">
-        <h1>Edit a Recommendation</h1>
+        <h2>Edit a Recommendation</h2>
         <form className="RecommendationEdit__form" onSubmit={this.handleSubmit}>
           <label for="recommendation-type">Specialty:</label>
           <select

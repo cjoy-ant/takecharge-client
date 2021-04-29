@@ -100,7 +100,7 @@ export default class VisitPage extends React.Component {
 
     return (
       <div className="VisitPage">
-        <div className="Visit">
+        <div className="VisitPage__visit">
           <Visit
             visit_id={visit_id}
             visit_type={visit_type}

@@ -80,7 +80,7 @@ export default class RecommendationPage extends React.Component {
 
     return (
       <div className="RecommendationPage">
-        <div className="Recommendation">
+        <div className="RecommendationPage__recommmendation">
           <Recommendation
             recommendation_id={recommendation_id}
             recommendation_type={recommendation_type}

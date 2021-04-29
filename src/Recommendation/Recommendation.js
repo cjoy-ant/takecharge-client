@@ -15,10 +15,9 @@ export default class Recommendation extends React.Component {
       <div className="Recommendation">
         <div className="Recommendation__type">
           <Link to={`/recommendations/${recommendation_id}`}>
-            {recommendation_type}
+            <h3>{recommendation_type}</h3>
           </Link>
         </div>
-        <br />
         <div className="Recommendation__notes">
           <span className="Recommendation__notes-title">Notes:</span>
           <br />

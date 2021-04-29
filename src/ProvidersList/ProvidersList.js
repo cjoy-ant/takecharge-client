@@ -41,7 +41,7 @@ export default class ProvidersList extends React.Component {
             <button className="ProvidersList__button-add">Add Provider</button>
           </Link>
         </div>
-        <ul id="ProvidersList">{this.makeProvidersList()}</ul>
+        <ul className="ProvidersList__list">{this.makeProvidersList()}</ul>
       </div>
     );
   }

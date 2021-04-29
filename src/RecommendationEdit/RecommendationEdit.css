@@ -1,12 +1,9 @@
-.RecommendationEdit {
-  margin: 20px 10px 20px 10px;
-  padding: 5px 0 10px 0px;
-  background: #eeeeee;
-}
-
 .RecommendationEdit__form {
+  margin: 20px;
+  padding: 20px;
   text-align: left;
-  padding-left: 50px;
+  background: #EDF5F5;
+  border-radius: 10px;
 }
 
 .RecommendationEdit__form label {
@@ -17,12 +14,26 @@
   margin-bottom: 10px;
 }
 
+.RecommendationEdit__form select {
+  max-width: 100%;
+}
+
 .RecommendationEdit__button-container {
   text-align: center;
-  padding: 20px 0 20px 0;
+  padding-top: 20px;
 }
 
 #recommendation-notes {
   margin: 10px 0 0 20px;
   max-width: 80%;
+}
+
+@media only screen and (min-width: 800px) {
+  .RecommendationEdit__form {
+    margin: 20px 100px 20px 100px;
+  }
+
+  .RecommendationEdit__form {
+    padding-left: 50px;
+  }
 }

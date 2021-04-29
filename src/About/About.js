@@ -5,20 +5,21 @@ import "./About.css";
 export default function About() {
   return (
     <div className="About">
-      <h1>About Page</h1>
+      <h2>About</h2>
       <div className="About__description">
         <p>
           TakeCharge aims to provide a way for patients to be in control of
           their health. Apps like MyChart only work if
         </p>
         <div className="About__description-list">
+          <p>
           1) all of the patient’s providers work within that same health system
           <br />
           2) the patient is tech savvy
           <br />
           3) the patient is cognitively intact and health literate.
+          </p>
         </div>
-
         <p>
           TakeCharge allows patients to save and manage information related to
           their health care providers, visits, and recommendations in a way that THEY

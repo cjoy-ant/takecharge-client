@@ -1,13 +1,23 @@
-.header {
-  background: #aaaaaa;
-  padding: 10px 0 10px 0;
+.Nav, .Nav__links, .header {
+  max-width: 200%;
+}
+
+header a, .header a:hover, .header a:active {
+  color: #282828;
+}
+
+header {
+  background: #B0D3D2;
+  padding: 1rem;
   font-size: 36px;
   font-weight: bold;
 }
 
-nav {
-  background: #eeeeee;
-  padding: 5px 5px 5px 5px;
+.Nav__links {
+  background: #EDF5F5;
+  padding: .5rem;
+  font-size: .8rem;
+  text-align: center;
 }
 
 a {
@@ -21,4 +31,16 @@ a:hover {
 
 a:active {
   color: #808080;
+}
+
+@media only screen and (min-width: 800px) {
+  .header {
+    font-size: 48px;
+    font-weight: bold;
+  }
+  
+  .Nav__links {
+    font-size: 20px;
+    text-align: center;
+  }
 }

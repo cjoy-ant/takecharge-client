@@ -1,25 +1,21 @@
-.RecommendationAdd {
-  margin: 20px 20px 20px 20px;
-  padding: 5px 0 10px 0px;
-  background: #eeeeee;
-}
-
 .RecommendationAdd__form {
   text-align: left;
-  padding-left: 20px;
+  margin: 20px 20px 20px 20px;
+  padding: 30px 25px 15px 25px;
+  background: #EDF5F5;
+  border-radius: 10px;
 }
 
 .RecommendationAdd__form label {
   padding: 0 5px 0 20px;
 }
 
-.RecommendationAdd__form input {
-  margin-bottom: 10px;
+.RecommendationAdd__form select {
+  max-width: 80%;
 }
 
 .RecommendationAdd__button-container {
   text-align: center;
-  padding-bottom: 20px;
 }
 
 #recommendation-notes {
@@ -30,4 +26,11 @@
 
 #add-rec-form__button-submit {
   margin-top: 20px;
+}
+
+@media only screen and (min-width: 800px) {
+  .RecommendationAdd__form {
+    margin: 20px 100px 20px 100px;
+    padding: 35px 20px 20px 50px;
+  }
 }

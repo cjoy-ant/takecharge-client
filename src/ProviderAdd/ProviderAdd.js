@@ -122,13 +122,13 @@ export default class ProviderAdd extends React.Component {
   render() {
     return (
       <div className="ProviderAdd">
-        <h1>Add a Health Care Provider</h1>
+        <h2>Add a Health Care Provider</h2>
         <form
           className="ProviderAdd__form"
           id="add-provider-form"
           onSubmit={this.handleSubmit}
         >
-          <h2>General Information</h2>
+          <h3>General Information</h3>
           <label htmlFor="hcp-type">Specialty</label>
           <input
             id="hcp-type"
@@ -156,7 +156,7 @@ export default class ProviderAdd extends React.Component {
           ></input>
           <br />
 
-          <h2>Contact</h2>
+          <h3>Contact</h3>
 
           <label htmlFor="hcp-phone">Phone Number</label>
           <input
@@ -177,11 +177,13 @@ export default class ProviderAdd extends React.Component {
             onChange={this.handleChangeCity}
             required
           ></input>
+          <br />
 
           <label htmlFor="hcp-address-state">State</label>
           <select id="hcp-address-state" onChange={this.handleChangeState}>
             {this.makeStatesListHTML()}
           </select>
+          <br/>
 
           <label htmlFor="hcp-address-zip">Zip Code</label>
           <input

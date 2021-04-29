@@ -1,5 +1,10 @@
 .Visit {
-  padding-top: 10px;
+  margin: 20px;
+  padding: 10px 25px 35px 35px;
+  background: #EDF5F5;
+  border-radius: 10px;
+  text-align: left;
+  max-width: 100%;
 }
 
 .Visit__title {
@@ -12,4 +17,7 @@
 
 #visit-notes {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@media only screen and (min-width: 800px) {
 }

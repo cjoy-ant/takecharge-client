@@ -80,7 +80,7 @@ export default class RecommendationAdd extends React.Component {
   render() {
     return (
       <div className="RecommendationAdd">
-        <h1>Add a Recommendation</h1>
+        <h2>Add a Recommendation</h2>
         <form className="RecommendationAdd__form" onSubmit={this.validateType}>
           <label for="recommendation-type">Specialty:</label>
           {this.makeRecTypeList()}
