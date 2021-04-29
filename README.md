@@ -1,4 +1,4 @@
-#TakeCharge
+# TakeCharge
 
 TakeCharge is a health care based React app that aims to provide patients  a way to be in control of their health. Patient portals, such as MyChart only work if:
 
@@ -10,6 +10,8 @@ TakeCharge allows patients to save and manage information related to their healt
 
 ![Home Page](images/takecharge.png)
 
+***
+
 ### Technology Used:
 * HTML
 * CSS
@@ -17,3 +19,19 @@ TakeCharge allows patients to save and manage information related to their healt
 * ReactJS
 * NodeJS
 * PostgreSQL
+
+***
+
+### Aspiring Features:
+* Enable different languages
+* Dark UI theme
+* Ability to add a new provider from Visit and Recommendation forms
+* User authentication
+* Encyrption
+
+***
+
+### What I learned from this Project:
+Through working on this project, I was able to practice my skills in building a client-side app with the ReactJS framework. I further refined my skills in building reusable components, creating routes to allow for different views, and utilizing context to efficiently manage state.
+
+In addition, I gained more experience in building and testing a server, and using PostgreSQL to build a database. I was also able to gain more experience with connecting my client-side app to my API, and successfully deploy both to Vercel and Heroku.
